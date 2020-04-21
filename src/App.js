@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MovieList from './components/MovieList'
+import 'antd/dist/antd.css';
 
 import './App.css';
 import { MovieProvider } from './contexts/MovieContext';

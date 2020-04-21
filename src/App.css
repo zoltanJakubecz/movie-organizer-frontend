@@ -5,3 +5,14 @@
   border: 1px black solid;
   border-radius: 10px;
 }
+
+.card {
+  font-size: 1.5em;
+  vertical-align: top;
+  padding: 20px;
+  /* font-weight: 700; */
+}
+
+img {
+  float: left;
+}
