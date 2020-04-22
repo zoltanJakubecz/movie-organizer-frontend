@@ -5,7 +5,6 @@ import Movie from './Movie';
 export default function MovieList() {
     const movies = useContext(MovieContext);
 
-    console.log(movies);
     return (
         <div style={{
             margin: "auto",

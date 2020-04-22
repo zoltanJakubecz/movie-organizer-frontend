@@ -24,7 +24,7 @@ const ModalBox = styled.div`
   text-align: center;
   font-size: 1.8em;
   position: relative;
-  padding: 5%;
+  padding: 2%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
