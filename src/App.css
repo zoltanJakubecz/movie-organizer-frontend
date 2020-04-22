@@ -1,7 +1,12 @@
 body {
-  padding: 5%;
+  margin: 0;
+  padding: 0;
 }
 
+.App {
+  width: 70vw;
+  margin: auto;
+}
 
 .site-card-border-less-wrapper {
   background: #ececec;
