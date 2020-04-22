@@ -1,15 +1,13 @@
 import React from 'react';
-import { Button } from 'antd';
+import Button from 'antd/es/button';
 import { PlusCircleOutlined } from '@ant-design/icons';
+
+import './control-panel.css';
 
 export default function ControlPanel() {
   return (
-    <div style={{
-      padding: "1rem",
-      border: "var(--primary-bg-color) solid 1px",
-      marginBottom: "1rem"
-    }}>
-      <Button type="primary">
+    <div className="controlPanel">
+      <Button className="newButton" type="primary">
         <PlusCircleOutlined /> New
       </Button>
     </div>

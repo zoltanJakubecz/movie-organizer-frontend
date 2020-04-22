@@ -1,0 +1,5 @@
+.controlPanel {
+  padding: 1rem;
+  border: var(--primary-bg-color) solid 1px;
+  margin-bottom: 1rem;
+}
