@@ -1,5 +1,7 @@
 import React from 'react'
 import { Card } from 'antd';
+import { Collapse } from 'antd';
+import { Columns, Column } from 'react-flex-columns'
 import Modal from './Modal';
 import styled from 'styled-components';
 
@@ -40,23 +42,45 @@ export default function Movie(props) {
     modalRef.current.openModal()
   }
 
+  const { Panel } = Collapse;
+
+  const text = `
+    A dog is a type of domesticated animal.
+    Known for its loyalty and faithfulness,
+    it can be found as a welcome guest in many households across the world.
+  `;
+    
+  const detailStyle = {
+    width: '100%'
+  }
+
   return (
+    
     <div>
       <div className="site-card-border-less-wrapper">
-        <Card className="card">
-          <Card.Grid hoverable={true} style={titleStyle}><strong>{props.movie.title}</strong></Card.Grid>
-          <Card.Grid hoverable={false} style={titleStyle1}>
-            <div>
-              <img src={props.movie.imageURL} alt='Kukutyin' height='300' />
-            </div>
-            <div>
-            <Card.Grid hoverable={false} style={gridStyle}>Category: {props.movie.categories.join(", ")}</Card.Grid>
-            <Card.Grid hoverable={false} style={gridStyle}>Director: {props.movie.director}</Card.Grid>
-            <Card.Grid hoverable={false} style={gridStyle}>{props.movie.releaseDate}</Card.Grid>
-            <Card.Grid hoverable={false} style={gridStyle}><Butt onClick={openModal}>Edit</Butt></Card.Grid>
-            </div>            
-          </Card.Grid>          
-        </Card>
+      <Card className="card">
+        <Columns>       
+              <Card.Grid hoverable={true} style={titleStyle}><strong>{props.movie.title}</strong></Card.Grid>
+              <Card.Grid hoverable={false} style={titleStyle1}>
+                <div>
+                  <img src={props.movie.imageURL} alt='Kukutyin' height='300' />
+                </div>
+                <div>
+                <Card.Grid hoverable={false} style={gridStyle}>Category: {props.movie.categories.join(", ")}</Card.Grid>
+                <Card.Grid hoverable={false} style={gridStyle}>Director: {props.movie.director}</Card.Grid>
+                <Card.Grid hoverable={false} style={gridStyle}>{props.movie.releaseDate}</Card.Grid>
+                <Card.Grid hoverable={false} style={gridStyle}><Butt onClick={openModal}>Edit</Butt></Card.Grid>
+                </div>            
+            </Card.Grid>
+          </Columns>            
+          <Columns>
+              <Collapse style={detailStyle}>
+                <Panel header={"Details off " + props.movie.title}>
+                  <p>{props.movie.plot}</p>
+                </Panel>
+              </Collapse>  
+            </Columns>         
+          </Card>
       </div>
 
       <Modal ref={modalRef}>
