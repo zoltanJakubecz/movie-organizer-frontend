@@ -3,9 +3,11 @@ import { Route } from 'react-router-dom';
 import ControlPanel from './ControlPanel';
 import MovieList from './MovieList';
 
+import './app-content.css';
+
 export default function AppContent() {
   return (
-    <div style={{ width: "90vw", margin: "auto" }}>
+    <div className="appContent">
       <ControlPanel />
       <Route path="/" component={MovieList} />
     </div>
