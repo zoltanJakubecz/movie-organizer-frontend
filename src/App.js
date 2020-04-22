@@ -1,21 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import MovieList from './components/MovieList'
 import 'antd/dist/antd.css';
 
 import './App.css';
-import { MovieProvider } from './contexts/MovieContext';
 import PageHeader from './components/page-header/PageHeader';
+import { MovieProvider } from './contexts/MovieContext';
+import AppContent from './components/AppContent';
 
 function App() {
   return (
     <Router>
-      <MovieProvider>
-        <div className="App">
-          <PageHeader />
-          <Route path="/movies" component={MovieList} />
-        </div>
-      </MovieProvider>
+      <div className="App">
+        <PageHeader />
+        <MovieProvider>
+          <Route path="/" component={AppContent} />
+        </MovieProvider>
+      </div>
     </Router>
   );
 }

@@ -1,6 +1,12 @@
 
 :root {
-  --primary-bg-color: #ececec
+  --primary-bg-color: #ececec;
+  --outline-color: #1890ff;
+}
+
+html {
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
 }
 
 body {
@@ -9,11 +15,7 @@ body {
 }
 
 .App {
-  width: 100vw;
-}
-
-.App > div:not(:first-child) {
-  width: 70vw;
+  width: 100%;
   margin: auto;
 }
 
