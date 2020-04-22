@@ -1,7 +1,6 @@
 import React from 'react'
-import { Card } from 'antd';
-import { Collapse } from 'antd';
-import { Columns, Column } from 'react-flex-columns'
+import { Card, Collapse } from 'antd';
+import { Columns} from 'react-flex-columns'
 import Modal from './Modal';
 import styled from 'styled-components';
 
