@@ -1,6 +1,8 @@
 import React from 'react'
-import { Card, Button } from 'antd';
+import { Card } from 'antd';
 import Modal from './Modal';
+import styled from 'styled-components';
+
 
 
 export default function Movie(props) {
@@ -29,6 +31,10 @@ export default function Movie(props) {
     fontweight: '900',
   };
   
+  const Butt = styled.button`
+  padding: 15px,
+`
+
   const modalRef = React.useRef();
   const openModal = () => {
     modalRef.current.openModal()
@@ -47,22 +53,25 @@ export default function Movie(props) {
             <Card.Grid hoverable={false} style={gridStyle}>Category: {props.movie.categories.join(", ")}</Card.Grid>
             <Card.Grid hoverable={false} style={gridStyle}>Director: {props.movie.director}</Card.Grid>
             <Card.Grid hoverable={false} style={gridStyle}>{props.movie.releaseDate}</Card.Grid>
-            <Card.Grid hoverable={false} style={gridStyle}><Button onClick={openModal}>Edit</Button></Card.Grid>
+            <Card.Grid hoverable={false} style={gridStyle}><Butt onClick={openModal}>Edit</Butt></Card.Grid>
             </div>            
           </Card.Grid>          
         </Card>
       </div>
 
       <Modal ref={modalRef}>
-        <h1><strong>{props.movie.title}</strong></h1>
         <form>
-        <label for="title">Movie title: </label>
-          <input type="text" id="title" placeholder={props.movie.title} />
-          <button type="submit">Submit</button>
+          <label >Movie title: </label><br />
+          <input type="text" placeholder={props.movie.title} /><br /><br />
+          <label>Categories: </label><br />
+          <input type="text" placeholder={props.movie.categories.join(", ")} /><br /><br />
+          <label>Release year: </label><br />
+          <input type="text" placeholder={props.movie.releaseDate} /><br /><br />
+          <input type="submit" />
         </form>
         
         
-        <Button onClick={() => modalRef.current.closeModal()}>Close</Button>
+        <button onClick={() => modalRef.current.closeModal()}>Close</button>
       </Modal>     {/* <h1>{props.movie.title}</h1> */}
     </div>
     )
