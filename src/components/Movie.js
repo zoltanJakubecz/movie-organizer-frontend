@@ -74,7 +74,7 @@ export default function Movie(props) {
           </Columns>            
           <Columns>
               <Collapse style={detailStyle}>
-                <Panel header={"Details off " + props.movie.title}>
+                <Panel header={"Details of " + props.movie.title}>
                   <p>{props.movie.plot}</p>
                 </Panel>
               </Collapse>  
