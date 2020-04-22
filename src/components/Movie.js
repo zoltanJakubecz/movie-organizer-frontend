@@ -1,5 +1,9 @@
 import React from 'react'
 import { Card } from 'antd';
+import Modal from './Modal';
+import styled from 'styled-components';
+
+
 
 export default function Movie(props) {
 
@@ -27,29 +31,48 @@ export default function Movie(props) {
     fontweight: '900',
   };
   
+  const Butt = styled.button`
+  padding: 15px,
+`
+
+  const modalRef = React.useRef();
+  const openModal = () => {
+    modalRef.current.openModal()
+  }
+
   return (
     <div>
       <div className="site-card-border-less-wrapper">
         <Card className="card">
-          <Card.Grid hoverable={false} style={titleStyle}><strong>{props.movie.title}</strong></Card.Grid>
+          <Card.Grid hoverable={true} style={titleStyle}><strong>{props.movie.title}</strong></Card.Grid>
           <Card.Grid hoverable={false} style={titleStyle1}>
             <div>
               <img src={props.movie.imageURL} alt='Kukutyin' height='300' />
             </div>
             <div>
-            <Card.Grid style={gridStyle}>Category: {props.movie.categories.join(", ")}</Card.Grid>
-            <Card.Grid style={gridStyle}>Director: {props.movie.director}</Card.Grid>
-            <Card.Grid style={gridStyle}>{props.movie.releaseDate}</Card.Grid>
-            </div>
-            
-          </Card.Grid>
-          
-          
-          
-          
+            <Card.Grid hoverable={false} style={gridStyle}>Category: {props.movie.categories.join(", ")}</Card.Grid>
+            <Card.Grid hoverable={false} style={gridStyle}>Director: {props.movie.director}</Card.Grid>
+            <Card.Grid hoverable={false} style={gridStyle}>{props.movie.releaseDate}</Card.Grid>
+            <Card.Grid hoverable={false} style={gridStyle}><Butt onClick={openModal}>Edit</Butt></Card.Grid>
+            </div>            
+          </Card.Grid>          
         </Card>
       </div>
-            {/* <h1>{props.movie.title}</h1> */}
+
+      <Modal ref={modalRef}>
+        <form>
+          <label >Movie title: </label><br />
+          <input type="text" placeholder={props.movie.title} /><br /><br />
+          <label>Categories: </label><br />
+          <input type="text" placeholder={props.movie.categories.join(", ")} /><br /><br />
+          <label>Release year: </label><br />
+          <input type="text" placeholder={props.movie.releaseDate} /><br /><br />
+          <input type="submit" />
+        </form>
+        
+        
+        <button onClick={() => modalRef.current.closeModal()}>Close</button>
+      </Modal>     {/* <h1>{props.movie.title}</h1> */}
     </div>
     )
 }
