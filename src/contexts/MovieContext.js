@@ -26,18 +26,18 @@ export const MovieProvider = props => {
     // },
   ]);
 
-  
+
 
   useEffect(() => {
-    async function getData(){
-    const res = await axios.get("http://localhost:8080/api/movies/1");
-    console.log(res);
-    setMovies(res.data);
+    async function getData() {
+      const res = await axios.get("http://localhost:8080/api/movies/?page=1");
+      console.log(res);
+      setMovies(res.data);
     }
     getData();
-  },[]);
+  }, []);
 
-  
+
 
   return (
     <MovieContext.Provider value={movies}>
