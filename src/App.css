@@ -19,6 +19,16 @@ body {
   margin: auto;
 }
 
+.content-box {
+  padding: 1rem;
+  border: var(--primary-bg-color) solid 1px;
+  margin-bottom: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
 .site-card-border-less-wrapper {
   background: #ececec;
   padding: 30px;
