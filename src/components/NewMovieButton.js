@@ -12,8 +12,15 @@ export default function NewMovieButton() {
   }
 
   return (
-    <Button className="newButton" type="primary" onClick={toggleVisibility}>
-      <PlusCircleOutlined /> New
+    <Button
+      className="newButton"
+      type="primary"
+      onClick={toggleVisibility}
+      style={{ width: "9rem" }}
+    >
+      {visible ?
+        "Change of heart" :
+        (<><PlusCircleOutlined /> New</>)}
     </Button>
   )
 }
