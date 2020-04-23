@@ -3,10 +3,6 @@
   box-shadow: var(--outline-color) 0 0 2px 0;
 }
 
-.movie-card img {
-  height: 100px;
-}
-
 .movie-card-header {
   display: flex;
   align-items: center;
@@ -20,4 +16,20 @@
 
 .movie-card-title {
   font-weight: bold;
+}
+
+.movie-card-details-header {
+  display: flex;
+  align-items: center;
+  margin-top: -16px;
+  margin-bottom: 1rem;
+}
+
+.movie-card-details-header img {
+  margin: 0 1rem 0 -16px;
+  height: 160px;
+}
+
+.movie-card-details-header-info > * {
+  margin-bottom: 0.5rem;
 }

@@ -68,9 +68,13 @@ export default function MovieCard(props) {
         <div className="movie-card-details">
           <Collapse style={{ width: '100%' }}>
             <Panel header={"Details of " + title}>
-              <img src={imageURL} alt='Kukutyin' height='300' />
-              <div>Categories: {categories ? categories.join(", ") : ""}</div>
-              <div>Director: {director}</div>
+              <div className="movie-card-details-header">
+                <img src={imageURL} alt='Kukutyin' height='300' />
+                <div className="movie-card-details-header-info">
+                  <div>Categories: {categories ? categories.join(", ") : ""}</div>
+                  <div>Director: {director}</div>
+                </div>
+              </div>
               <div>{mPlot}</div>
             </Panel>
           </Collapse>
