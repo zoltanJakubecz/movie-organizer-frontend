@@ -6,16 +6,18 @@
 .movie-card-header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   padding: 0 0.5rem;
   margin-bottom: 1rem;
 }
 
-.movie-card-header > * {
-  width: 33%;
+.movie-card-header > *:not(:last-child) {
+  margin-right: 5%;
 }
 
 .movie-card-title {
   font-weight: bold;
+  min-width: 50%;
 }
 
 .movie-card-details-header {
