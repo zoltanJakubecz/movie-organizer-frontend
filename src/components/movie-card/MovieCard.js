@@ -51,20 +51,24 @@ export default function MovieCard(props) {
     <React.Fragment>
 
       <Card className="movie-card">
-
-        <img src={imageURL} alt='Kukutyin' height='300' />
-        <div>{title} ({release})</div>
-        <div>
-          {!isDeleteActive ?
-            <Button type="dashed" onClick={handleShowDelete}>Delete</Button> :
-            <span>Do you really want to delete? <Button onClick={handleHideDelete}>No</Button> <Button onClick={handleDelete}>Yes</Button></span>
-          }
+        <div className="movie-card-header">
+          <div className="movie-card-title">{title} ({release})</div>
+          <div><Button type="dashed" onClick={openModal}>Edit</Button></div>
+          <div>
+            {!isDeleteActive ?
+              <Button type="dashed" onClick={handleShowDelete}>Delete</Button> :
+              <span>
+                <Button onClick={handleHideDelete}>No</Button>
+                <Button onClick={handleDelete}>Yes</Button> Are you sure?
+              </span>
+            }
+          </div>
         </div>
-        <div><Button type="dashed" onClick={openModal}>Edit</Button></div>
 
-        <div>
+        <div className="movie-card-details">
           <Collapse style={{ width: '100%' }}>
             <Panel header={"Details of " + title}>
+              <img src={imageURL} alt='Kukutyin' height='300' />
               <div>Categories: {categories ? categories.join(", ") : ""}</div>
               <div>Director: {director}</div>
               <div>{mPlot}</div>

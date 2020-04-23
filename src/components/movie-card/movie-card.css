@@ -1,3 +1,23 @@
+.movie-card {
+  margin-bottom: 1rem;
+  box-shadow: var(--outline-color) 0 0 2px 0;
+}
+
 .movie-card img {
   height: 100px;
+}
+
+.movie-card-header {
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.movie-card-header > * {
+  width: 33%;
+}
+
+.movie-card-title {
+  font-weight: bold;
 }
