@@ -5,28 +5,7 @@ export const MovieContext = createContext();
 
 
 export const MovieProvider = props => {
-  const [movies, setMovies] = useState([
-    // {
-    //   "id": 1,
-    //   "title": "Alien",
-    //   "director": "Ridley Scott",
-    //   "releaseDate": 1979
-    // },
-    // {
-    //   "id": 2,
-    //   "title": "Harry Potter",
-    //   "director": "David Yates",
-    //   "releaseDate": 1979
-    // },
-    // {
-    //   "id": 3,
-    //   "title": "Back to the Future",
-    //   "director": "Robert Zemekis",
-    //   "releaseDate": 1979
-    // },
-  ]);
-
-
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -43,12 +22,23 @@ export const MovieProvider = props => {
     setMovies(newMovies);
   }
 
+  function handleDeleteFromContext(id) {
+    let elementsToKeep = [];
+    for (let movie of movies) {
+      if (movie.id != id) {
+        elementsToKeep.push(movie);
+      }
+    }
+    setMovies(elementsToKeep);
+    axios.delete("http://localhost:8080/api/movies/?id=" + id);
+  }
+
   return (
     <MovieContext.Provider value={{
       movies,
       actions: {
-        delete: undefined,
-        add
+        add,
+        delete: handleDeleteFromContext
       }
     }}>
       {props.children}
