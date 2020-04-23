@@ -49,17 +49,24 @@ export default function Movie(props) {
   const { handleSubmit, register, errors } = useForm();
 
   const onSubmit = values => {
-    console.log(props.movie.id);
     setTitle(values.Title);
     setDirector(values.Director);
     setRelease(values.release);
-    if (values.newcategory !== "") {
-      values.Categories.push(values.newcategory);
+
+    let categoryList;
+    if (!values.Categories && values.newcategory !== "") {
+      categoryList = [values.newcategory];
+    } else if (values.Categories) {
+      categoryList = typeof values.Categories === "string" ? [values.Categories] : values.Categories;
+      if (values.newcategory !== "") {
+        categoryList.push(values.newcategory);
+      }
     }
-    setCategories(values.Categories);
+    setCategories(categoryList);
+
     actions.update(props.movie.id, {
       title: values.Title,
-      categories: values.Categories,
+      categories: categoryList,
       director: values.Director,
       plot: props.movie.plot,
       releaseDate: values.release,
@@ -127,7 +134,7 @@ export default function Movie(props) {
                 <img src={imageURL} alt='Kukutyin' height='300' />
               </div>
               <div>
-                <Card.Grid hoverable={false} style={gridStyle}>Category: {categories.join(", ")}</Card.Grid>
+                <Card.Grid hoverable={false} style={gridStyle}>Category: {categories ? categories.join(", ") : ""}</Card.Grid>
                 <Card.Grid hoverable={false} style={gridStyle}>Director: {director}</Card.Grid>
                 <Card.Grid hoverable={false} style={gridStyle}>{release}</Card.Grid>
                 <Card.Grid hoverable={false} style={gridStyle}><Button onClick={openModal}>Edit</Button></Card.Grid>
@@ -161,7 +168,7 @@ export default function Movie(props) {
             <label >Director: </label><br />
             <Input name="Director" defaultValue={director} ref={register} /><br /><br />
             <label>Categories: </label><br />
-            {categories.map((category, i) => (
+            {categories && categories.map((category, i) => (
               <React.Fragment key={i}>
                 <input type="checkbox" name="Categories" defaultValue={category} defaultChecked={true} ref={register} />
                 <label> {category}  </label>
@@ -172,8 +179,6 @@ export default function Movie(props) {
             <label>Release year: </label><br />
             <Input name="release" type="number" defaultValue={release} ref={register({ min: 1900, max: 2020 })} /><br /><br />
             {errors.release && 'Year must be between 1900 and 2020'}
-            
-            
             <br />
             <br />
             <Button type="submit">Update</Button>
