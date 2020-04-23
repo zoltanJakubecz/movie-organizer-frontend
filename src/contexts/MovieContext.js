@@ -22,10 +22,15 @@ export const MovieProvider = props => {
     setMovies(newMovies);
   }
 
+  const update = async function (id, movie){
+    console.log(movie);
+    await axios.put("http://localhost:8080/api/movies/" + id, movie);
+  }
+
   function handleDeleteFromContext(id) {
     let elementsToKeep = [];
     for (let movie of movies) {
-      if (movie.id != id) {
+      if (movie.id !== id) {
         elementsToKeep.push(movie);
       }
     }
@@ -38,6 +43,7 @@ export const MovieProvider = props => {
       movies,
       actions: {
         add,
+        update,
         delete: handleDeleteFromContext
       }
     }}>

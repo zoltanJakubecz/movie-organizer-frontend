@@ -16,7 +16,7 @@ const Button = styled.button`
   `
 const Input = styled.input`
   width: 80%;
-  border-radius: 10px;
+  border-radius: 5px;
 `
 
 const ModalHeader = styled.div`
@@ -37,7 +37,7 @@ const CloseSpan = styled.span`
 
 export default function Movie(props) {
   const [isDeleteActive, setIsDeleteActive] = useState(false);
-  const { movies, actions } = useContext(MovieContext);
+  const { actions } = useContext(MovieContext);
   const handleDeleteFromContext = actions.delete;
 
   const [title, setTitle] = useState(props.movie.title);
@@ -49,7 +49,7 @@ export default function Movie(props) {
   const { handleSubmit, register, errors } = useForm();
 
   const onSubmit = values => {
-    console.log(categories);
+    console.log(props.movie.id);
     setTitle(values.Title);
     setDirector(values.Director);
     setRelease(values.release);
@@ -57,6 +57,14 @@ export default function Movie(props) {
       values.Categories.push(values.newcategory);
     }
     setCategories(values.Categories);
+    actions.update(props.movie.id, {
+      title: values.Title,
+      categories: values.Categories,
+      director: values.Director,
+      plot: props.movie.plot,
+      releaseDate: values.release,
+      imageURL: props.movie.imageURL
+    });
     modalRef.current.closeModal();
   };
 
@@ -113,15 +121,15 @@ export default function Movie(props) {
       <div className="site-card-border-less-wrapper">
         <Card className="card">
           <Columns>
-            <Card.Grid hoverable={true} style={titleStyle}><strong>{props.movie.title}</strong></Card.Grid>
+            <Card.Grid hoverable={true} style={titleStyle}><strong>{title}</strong></Card.Grid>
             <Card.Grid hoverable={false} style={titleStyle1}>
               <div>
-                <img src={props.movie.imageURL} alt='Kukutyin' height='300' />
+                <img src={imageURL} alt='Kukutyin' height='300' />
               </div>
               <div>
-                <Card.Grid hoverable={false} style={gridStyle}>Category: {props.movie.categories.join(", ")}</Card.Grid>
-                <Card.Grid hoverable={false} style={gridStyle}>Director: {props.movie.director}</Card.Grid>
-                <Card.Grid hoverable={false} style={gridStyle}>{props.movie.releaseDate}</Card.Grid>
+                <Card.Grid hoverable={false} style={gridStyle}>Category: {categories.join(", ")}</Card.Grid>
+                <Card.Grid hoverable={false} style={gridStyle}>Director: {director}</Card.Grid>
+                <Card.Grid hoverable={false} style={gridStyle}>{release}</Card.Grid>
                 <Card.Grid hoverable={false} style={gridStyle}><Button onClick={openModal}>Edit</Button></Card.Grid>
                 {<Card.Grid hoverable={false} style={gridStyle}>
                   {!isDeleteActive ?
@@ -164,6 +172,8 @@ export default function Movie(props) {
             <label>Release year: </label><br />
             <Input name="release" type="number" defaultValue={release} ref={register({ min: 1900, max: 2020 })} /><br /><br />
             {errors.release && 'Year must be between 1900 and 2020'}
+            
+            
             <br />
             <br />
             <Button type="submit">Update</Button>
