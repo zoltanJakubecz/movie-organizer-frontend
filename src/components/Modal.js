@@ -32,7 +32,7 @@ const ModalBox = styled.div`
   width: 45%;
   background-color: rgba(198,198,198,0.9);
   box-shadow: 0 0 10px rgba(0,0,0,0.25);
-  border-radius: 20px;
+  border-radius: 10px;
   z-index: 101;
   overflow-y: auto;
 `
