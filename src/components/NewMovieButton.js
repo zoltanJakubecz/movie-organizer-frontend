@@ -16,7 +16,7 @@ export default function NewMovieButton() {
       className="newButton"
       type="primary"
       onClick={toggleVisibility}
-      style={{ width: "9rem" }}
+      style={{ width: "9rem", marginBottom: "1rem" }}
     >
       {visible ?
         "Change of heart" :

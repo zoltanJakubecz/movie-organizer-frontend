@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 export default function EditorModal(props) {
 
-  const { modalRef, states, update } = props;
+  const { modalRef, movie, states, update } = props;
   const [title, setTitle] = states.title;
   const [categories, setCategories] = states.categories;
   const [director, setDirector] = states.director;
@@ -29,13 +29,13 @@ export default function EditorModal(props) {
     }
     setCategories(categoryList);
 
-    update(props.movie.id, {
+    update(movie.id, {
       title: values.Title,
       categories: categoryList,
       director: values.Director,
-      plot: props.movie.plot,
+      plot: movie.plot,
       releaseDate: values.release,
-      imageURL: props.movie.imageURL
+      imageURL: movie.imageURL
     });
     modalRef.current.closeModal();
   };

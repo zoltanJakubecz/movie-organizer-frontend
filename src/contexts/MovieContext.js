@@ -5,43 +5,47 @@ export const MovieContext = createContext();
 
 
 export const MovieProvider = props => {
-  const [movies, setMovies] = useState([]);
+  const [data, setData] = useState({
+    totalMovieCount: 0,
+    page: 1,
+    movies: [],
+  });
 
   useEffect(() => {
     async function getData() {
       const res = await axios.get("http://localhost:8080/api/movies/?page=1");
-      console.log(res);
-      setMovies(res.data);
+      setData(Object.assign(res.data, { page: 1 }));
     }
     getData();
   }, []);
 
-  const add = async function (movie) {
-    await axios.post("http://localhost:8080/api/movies", movie);
-    const newMovies = [movie, ...movies.slice(0, 4)];
-    setMovies(newMovies);
+  const loadPage = async function (page) {
+    const res = await axios.get("http://localhost:8080/api/movies/?page=" + page);
+    const { totalMovieCount, movies } = res.data;
+    setData({ totalMovieCount, page, movies });
   }
 
-  const update = async function (id, movie){
-    console.log(movie);
+  const add = async function (movie) {
+    await axios.post("http://localhost:8080/api/movies", movie);
+    await loadPage(data.page);
+  }
+
+  const update = async function (id, movie) {
     await axios.put("http://localhost:8080/api/movies/" + id, movie);
   }
 
-  function handleDeleteFromContext(id) {
-    let elementsToKeep = [];
-    for (let movie of movies) {
-      if (movie.id !== id) {
-        elementsToKeep.push(movie);
-      }
-    }
-    setMovies(elementsToKeep);
-    axios.delete("http://localhost:8080/api/movies/?id=" + id);
+  async function handleDeleteFromContext(id) {
+    await axios.delete("http://localhost:8080/api/movies/?id=" + id);
+    await loadPage(data.page);
   }
 
   return (
     <MovieContext.Provider value={{
-      movies,
+      total: data.totalMovieCount,
+      page: data.page,
+      movies: data.movies,
       actions: {
+        loadPage,
         add,
         update,
         delete: handleDeleteFromContext

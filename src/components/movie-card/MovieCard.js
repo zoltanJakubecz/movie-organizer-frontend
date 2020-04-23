@@ -43,6 +43,7 @@ export default function MovieCard(props) {
   }
 
   const handleDelete = () => {
+    console.log("wat")
     handleDeleteFromContext(mId);
   }
 
@@ -84,6 +85,7 @@ export default function MovieCard(props) {
 
       <EditorModal
         modalRef={modalRef}
+        movie={{ id: mId, plot: mPlot, imageURL: mImageURL }}
         states={{
           title: [title, setTitle],
           categories: [categories, setCategories],
