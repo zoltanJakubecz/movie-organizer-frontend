@@ -75,7 +75,7 @@ export default function MovieCard(props) {
                   <div>Director: {director}</div>
                 </div>
               </div>
-              <div>{mPlot}</div>
+              <div className="movie-card-details-plot">{mPlot}</div>
             </Panel>
           </Collapse>
         </div>

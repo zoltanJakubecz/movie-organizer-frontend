@@ -33,3 +33,7 @@
 .movie-card-details-header-info > * {
   margin-bottom: 0.5rem;
 }
+
+.movie-card-details-plot {
+  text-align: justify;
+}
