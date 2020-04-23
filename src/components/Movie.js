@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useState, useContext } from 'react';
 import { Card, Collapse } from 'antd';
 import { Columns} from 'react-flex-columns'
 import Modal from './Modal';
 import styled from 'styled-components';
+import MovieList from './MovieList';
+import { MovieContext } from '../contexts/MovieContext';
+
 
 
 
 export default function Movie(props) {
+  const [isDeleteActive, setIsDeleteActive] = useState(false);
+  const {movies, actions} = useContext(MovieContext);
+  const handleDeleteFromContext = actions.delete;
 
   const gridStyle = {
     width: '60%',
@@ -42,15 +48,21 @@ export default function Movie(props) {
   }
 
   const { Panel } = Collapse;
-
-  const text = `
-    A dog is a type of domesticated animal.
-    Known for its loyalty and faithfulness,
-    it can be found as a welcome guest in many households across the world.
-  `;
     
   const detailStyle = {
     width: '100%'
+  }
+  
+  const handleShowDelete = ()=>{
+    setIsDeleteActive(true);
+  }
+
+  const handleHideDelete = () =>{
+    setIsDeleteActive(false);
+  }
+
+  const handleDelete = () =>{
+    handleDeleteFromContext(props.movie.id);
   }
 
   return (
@@ -69,6 +81,12 @@ export default function Movie(props) {
                 <Card.Grid hoverable={false} style={gridStyle}>Director: {props.movie.director}</Card.Grid>
                 <Card.Grid hoverable={false} style={gridStyle}>{props.movie.releaseDate}</Card.Grid>
                 <Card.Grid hoverable={false} style={gridStyle}><Butt onClick={openModal}>Edit</Butt></Card.Grid>
+                {<Card.Grid hoverable={false} style={gridStyle}>
+                {!isDeleteActive ? 
+                  <Butt onClick={handleShowDelete}>Delete</Butt> : 
+                  <span>Do you really want to delete? <Butt onClick={handleHideDelete}>No</Butt> <Butt onClick={handleDelete}>Yes</Butt></span> 
+                  }
+                </Card.Grid>}
                 </div>            
             </Card.Grid>
           </Columns>            
