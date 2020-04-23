@@ -38,16 +38,21 @@ export default function Movie(props) {
   const [categories, setCategories] = useState(props.movie.categories);
   const [director, setDirector] = useState(props.movie.director);
   const [release, setRelease] = useState(props.movie.releaseDate);
+  const [imageURL, setImageURL] = useState(props.movie.imageURL)
 
   const { handleSubmit, register, errors } = useForm();
+  
   const onSubmit = values => {
-    console.log(values);
-    setTitle(values.title);
-    setDirector(values.director);
+    console.log(categories);
+    setTitle(values.Title);
+    setDirector(values.Director);
     setRelease(values.release);
+    if(values.newcategory !== ""){
+      values.Categories.push(values.newcategory);
+    }
     setCategories(values.Categories);
+    modalRef.current.closeModal();
   };
-
 
   const gridStyle = {
     width: '60%',
@@ -78,8 +83,6 @@ export default function Movie(props) {
     modalRef.current.openModal()
   };
 
-  
-
   return (
     <div>
       <div className="site-card-border-less-wrapper">
@@ -87,7 +90,7 @@ export default function Movie(props) {
           <Card.Grid hoverable={true} style={titleStyle}><strong>{title}</strong></Card.Grid>
           <Card.Grid hoverable={false} style={titleStyle1}>
             <div>
-              <img src={props.movie.imageURL} alt='Kukutyin' height='300' />
+              <img src={imageURL} alt='Kukutyin' height='300' />
             </div>
             <div>
             <Card.Grid hoverable={false} style={gridStyle}>Category: {categories.join(", ")}</Card.Grid>
@@ -103,36 +106,32 @@ export default function Movie(props) {
         <ModalHeader>
           <CloseSpan onClick={() => modalRef.current.closeModal()}><strong>X</strong></CloseSpan>
         </ModalHeader>
-        <form onSubmit={handleSubmit(onSubmit)}>
-
-        <div>
-    
-          {categories.map((category, i) => (
-          <>
-            <input label={category} type="checkbox" name="Categories" defaultValue={category} defaultChecked={true} ref={register} key={i} />
-            <label>{category}</label>
-          </>
-          ))}
-
-        </div>
-
-
-          <label >Movie title: </label><br />
-          <Input name="title" defaultValue={title} ref={register} /><br /><br />
-          <label >Director: </label><br />
-          <Input name="director" defaultValue={director} ref={register} /><br /><br />
-          <label>Categories: </label><br />
-          <Input name="categories" defaultValue={categories.join(", ")} ref={register} /><br /><br />
-          <label>Release year: </label><br />
-          <Input name="release" type="number" defaultValue={release} ref={register({ min: 1900, max: 2020 })} /><br /><br />
-          {errors.release && 'Year must be between 1900 and 2020'}
-          <br />
-          <br />
-          <ModalFooter>
-            <Button type="submit" >Update</Button>
-          </ModalFooter>
-          
-        </form>
+        <ModalBody>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label >Movie title: </label><br />
+            <Input name="Title" defaultValue={title} ref={register} /><br /><br />
+            <label >Director: </label><br />
+            <Input name="Director" defaultValue={director} ref={register} /><br /><br />
+            <label>Categories: </label><br />
+            {categories.map((category, i) => (
+              <React.Fragment key={i}>
+                <input type="checkbox" name="Categories" defaultValue={category} defaultChecked={true} ref={register} />
+                <label> {category}  </label>
+              </React.Fragment>
+            ))}
+            <br />
+            <Input name="newcategory" autoComplete="off" placeholder="New category" ref={register} /><br /><br />
+            <label>Release year: </label><br />
+            <Input name="release" type="number" defaultValue={release} ref={register({ min: 1900, max: 2020 })} /><br /><br />
+            {errors.release && 'Year must be between 1900 and 2020'}
+            <br />
+            <br />
+            <Button type="submit">Update</Button>
+          </form>
+        </ModalBody>
+        <ModalFooter>
+          <Button onClick={() => modalRef.current.closeModal()}>Cancel</Button>
+        </ModalFooter>      
       </Modal>    
     </div>
     )
