@@ -5,10 +5,13 @@ import { Button, Input } from 'antd';
 import CategoryInputs from './CategoryInputs';
 
 import './movie-form.css';
+import { MovieContext } from '../../contexts/MovieContext';
 
 export default function MovieForm() {
 
-  const { visible } = useContext(VisibilityContext);
+  const { visible, setVisible } = useContext(VisibilityContext);
+  const { actions } = useContext(MovieContext);
+  const [form] = Form.useForm();
 
   const style = {
     display: visible ? "block" : "none",
@@ -33,8 +36,16 @@ export default function MovieForm() {
     }
   }
 
-  const onFinish = function (values) {
-    console.log(values);
+  const onFinish = async function (values) {
+    try {
+      const movie = Object.assign(values, {
+        releaseDate: parseInt(values.releaseDate)
+      });
+      actions.add(movie);
+    } catch (error) {
+    }
+    setVisible(false);
+    form.resetFields();
   }
 
   return (
@@ -42,7 +53,7 @@ export default function MovieForm() {
 
       <h1 style={{ margin: "0 0 1rem 3rem" }}>Expand your collection!</h1>
 
-      <Form id="movie-form" name="dynamic_form_item" {...layout.withLabel} onFinish={onFinish}>
+      <Form form={form} id="movie-form" name="dynamic_form_item" {...layout.withLabel} onFinish={onFinish}>
 
         <Form.Item label="Title" name="title" rules={[{ required: true }]} validateTrigger={['onBlur']}>
           <Input placeholder="movie's title" />
@@ -58,6 +69,10 @@ export default function MovieForm() {
 
         <Form.Item label="Plot" name="plot">
           <Input.TextArea placeholder="Enter plot here" />
+        </Form.Item>
+
+        <Form.Item label="Image" name="imageURL" type="url">
+          <Input placeholder="image url" />
         </Form.Item>
 
         <CategoryInputs layout={layout} />

@@ -37,10 +37,20 @@ export const MovieProvider = props => {
     getData();
   }, []);
 
-
+  const add = async function (movie) {
+    await axios.post("http://localhost:8080/api/movies", movie);
+    const newMovies = [movie, ...movies.slice(0, 4)];
+    setMovies(newMovies);
+  }
 
   return (
-    <MovieContext.Provider value={movies}>
+    <MovieContext.Provider value={{
+      movies,
+      actions: {
+        delete: undefined,
+        add
+      }
+    }}>
       {props.children}
     </MovieContext.Provider>
   )
