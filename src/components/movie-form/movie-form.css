@@ -1,0 +1,7 @@
+#movie-form > div:last-child {
+  margin-bottom: 0;
+}
+
+#movie-form > div {
+  width: 80%;
+}

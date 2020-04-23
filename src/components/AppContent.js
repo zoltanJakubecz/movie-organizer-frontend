@@ -4,7 +4,7 @@ import ControlPanel from './ControlPanel';
 import MovieList from './MovieList';
 
 import './app-content.css';
-import MovieForm from './MovieForm';
+import MovieForm from './movie-form/MovieForm';
 import { VisibilitySwitcher } from '../contexts/VisibilityContext';
 
 export default function AppContent() {
