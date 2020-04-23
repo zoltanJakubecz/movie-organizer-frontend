@@ -29,22 +29,8 @@ body {
   display: none;
 }
 
-.site-card-border-less-wrapper {
-  background: #ececec;
-  padding: 30px;
-  margin: 5px;
-  border: 1px black solid;
-  border-radius: 10px;
-}
-
-.card {
-  font-size: 1.5em;
-  vertical-align: top;
-  padding: 20px;
-  border-radius: 10px;
-  /* font-weight: 700; */
-}
-
-img {
-  float: left;
+#movie-list {
+  margin: auto;
+  padding: 1rem;
+  border: var(--primary-bg-color) solid 1px;
 }

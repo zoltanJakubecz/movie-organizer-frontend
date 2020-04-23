@@ -1,18 +1,15 @@
 import React, { useContext } from 'react';
 import { MovieContext } from '../contexts/MovieContext';
-import Movie from './Movie';
+// import Movie from './Movie';
+import MovieCard from './movie-card/MovieCard';
 
 export default function MovieList() {
     const { movies } = useContext(MovieContext);
 
     return (
-        <div style={{
-            margin: "auto",
-            padding: "1rem",
-            border: "var(--primary-bg-color) solid 1px",
-        }}>
+        <div id="movie-list">
             {movies.map(movie => (
-                <Movie key={movie.id} movie={movie} />
+                <MovieCard key={movie.id} movie={movie} />
             ))}
         </div>
     )

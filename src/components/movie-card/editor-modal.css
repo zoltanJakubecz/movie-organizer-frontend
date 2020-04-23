@@ -1,0 +1,21 @@
+#editor-modal button {
+  padding: 6px;
+  background: #0072ed;
+  color: white;
+  width: 120px;
+  border-radius: 10px;
+}
+
+#editor-modal input {
+  width: 80%;
+  border-radius: 5px;
+}
+
+#editor-modal .modal-header,
+#editor-modal .modal-footer {
+  text-align: right;
+}
+
+#editor-modal .close-span {
+  cursor: pointer;
+}
