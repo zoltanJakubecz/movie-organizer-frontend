@@ -21,13 +21,15 @@ export const MovieProvider = props => {
 
   const loadPage = async function (page) {
     const res = await axios.get("http://localhost:8080/api/movies/?page=" + page);
-    const { totalMovieCount, movies } = res.data;
-    setData({ totalMovieCount, page, movies });
+    setData(Object.assign(res.data, { page }));
   }
 
   const add = async function (movie) {
-    await axios.post("http://localhost:8080/api/movies", movie);
-    await loadPage(data.page);
+    const res = await axios.post("http://localhost:8080/api/movies", movie);
+    setData(Object.assign({ ...data }, {
+      totalMovieCount: data.totalMovieCount + 1,
+      movies: [res.data, ...(data.movies.slice(0, 4))]
+    }))
   }
 
   const update = async function (id, movie) {
