@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import './control-panel.css';
 import NewMovieButton from './NewMovieButton';
 import { Pagination } from 'antd';
-import { MovieContext } from '../contexts/MovieContext';
+import { MovieContext } from '../../contexts/MovieContext';
 
 export default function ControlPanel(props) {
 

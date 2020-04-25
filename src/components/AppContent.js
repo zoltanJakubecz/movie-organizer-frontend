@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
-import ControlPanel from './ControlPanel';
-import MovieList from './MovieList';
+import ControlPanel from './control-panel/ControlPanel';
+import MovieList from './movie-list/MovieList';
 
 import './app-content.css';
 import MovieForm from './movie-form/MovieForm';

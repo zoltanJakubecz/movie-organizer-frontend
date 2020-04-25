@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Card, Collapse } from 'antd';
 import Button from 'antd/es/button';
-import { MovieContext } from '../../contexts/MovieContext';
+import { MovieContext } from '../../../contexts/MovieContext';
 import EditorModal from './EditorModal';
 
 import './movie-card.css';

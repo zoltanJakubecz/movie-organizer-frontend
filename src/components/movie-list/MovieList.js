@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { MovieContext } from '../contexts/MovieContext';
-// import Movie from './Movie';
+import { MovieContext } from '../../contexts/MovieContext';
 import MovieCard from './movie-card/MovieCard';
 
 export default function MovieList() {

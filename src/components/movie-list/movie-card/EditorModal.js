@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from '../Modal';
+import Modal from './Modal';
 import { useForm } from 'react-hook-form';
 
 export default function EditorModal(props) {
