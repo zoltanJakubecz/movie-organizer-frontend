@@ -1,26 +1,23 @@
-import React, { useContext } from 'react'
+import React from 'react';
 import Button from 'antd/es/button';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { VisibilityContext } from '../contexts/VisibilityContext';
 
-export default function NewMovieButton() {
+export default function NewMovieButton(props) {
 
-  const { visible, setVisible } = useContext(VisibilityContext);
+  const [movieFormOpen, setMovieFormOpen] = props.movieFormState;
 
-  const toggleVisibility = function () {
-    setVisible(!visible);
+  const onClick = function () {
+    setMovieFormOpen(!movieFormOpen);
   }
 
   return (
     <Button
       className="newButton"
       type="primary"
-      onClick={toggleVisibility}
+      onClick={onClick}
       style={{ width: "9rem", marginBottom: "1rem" }}
     >
-      {visible ?
-        "Change of heart" :
-        (<><PlusCircleOutlined /> New</>)}
+      {movieFormOpen ? "Change of heart" : (<><PlusCircleOutlined /> New</>)}
     </Button>
   )
 }

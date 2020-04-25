@@ -43,7 +43,6 @@ export default function MovieCard(props) {
   }
 
   const handleDelete = () => {
-    console.log("wat")
     handleDeleteFromContext(mId);
   }
 

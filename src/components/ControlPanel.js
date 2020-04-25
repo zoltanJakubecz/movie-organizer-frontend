@@ -6,8 +6,9 @@ import NewMovieButton from './NewMovieButton';
 import { Pagination } from 'antd';
 import { MovieContext } from '../contexts/MovieContext';
 
-export default function ControlPanel() {
+export default function ControlPanel(props) {
 
+  const { movieFormState } = props.controls;
   const { total, page, actions } = useContext(MovieContext);
   const loadPage = actions.loadPage;
 
@@ -17,7 +18,7 @@ export default function ControlPanel() {
 
   return (
     <div className="controlPanel">
-      <NewMovieButton />
+      <NewMovieButton movieFormState={movieFormState} />
       <Pagination
         current={page}
         defaultCurrent={1}

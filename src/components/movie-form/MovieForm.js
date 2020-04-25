@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { VisibilityContext } from '../../contexts/VisibilityContext';
 import Form from 'antd/es/form/Form';
 import { Button, Input } from 'antd';
 import CategoryInputs from './CategoryInputs';
@@ -7,15 +6,11 @@ import CategoryInputs from './CategoryInputs';
 import './movie-form.css';
 import { MovieContext } from '../../contexts/MovieContext';
 
-export default function MovieForm() {
+export default function MovieForm(props) {
 
-  const { visible, setVisible } = useContext(VisibilityContext);
+  const [isOpen, setIsOpen] = props.openState;
   const { actions } = useContext(MovieContext);
   const [form] = Form.useForm();
-
-  const style = {
-    display: visible ? "block" : "none",
-  }
 
   const layout = {
     withLabel: {
@@ -44,12 +39,12 @@ export default function MovieForm() {
       actions.add(movie);
     } catch (error) {
     }
-    setVisible(false);
     form.resetFields();
+    setIsOpen(false);
   }
 
-  return (
-    <div id="movie-form-div" className="content-box" style={style}>
+  return isOpen && (
+    <div id="movie-form-div" className="content-box">
 
       <h1 style={{ margin: "0 0 1rem 3rem" }}>Expand your collection!</h1>
 
