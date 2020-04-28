@@ -1,10 +1,10 @@
-#editor-modal button {
-  padding: 6px;
+/* .modal-footer button {
+  padding: 2px;
   background: #0072ed;
   color: white;
   width: 120px;
   border-radius: 10px;
-}
+} */
 
 #editor-modal input {
   width: 80%;
@@ -16,6 +16,18 @@
   text-align: right;
 }
 
-#editor-modal .close-span {
+.modal-header, .modal-footer {
+  text-align: right;
+}
+
+.modal-footer {
+  position: absolute;
+  bottom: 0;
+  width: 92%;
+  height: 8%;
+  margin: 0 auto;
+}
+
+.close-span {
   cursor: pointer;
 }

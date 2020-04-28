@@ -25,7 +25,8 @@ export default function MovieCard(props) {
   const [categories, setCategories] = useState(mCategories);
   const [director, setDirector] = useState(mDirector);
   const [release, setRelease] = useState(mReleaseDate);
-  const [imageURL, setImageURL] = useState(mImageURL)
+  const [imageURL, setImageURL] = useState(mImageURL);
+  const [plot, setPlot] = useState(mPlot);
 
   const modalRef = React.useRef();
   const openModal = () => {
@@ -90,7 +91,8 @@ export default function MovieCard(props) {
           categories: [categories, setCategories],
           director: [director, setDirector],
           release: [release, setRelease],
-          imageURL: [imageURL, setImageURL]
+          imageURL: [imageURL, setImageURL],
+          plot: [plot, setPlot]
         }}
         update={actions.update}
       />

@@ -1,6 +1,20 @@
 import React from 'react'
 import Modal from './Modal';
-import { useForm } from 'react-hook-form';
+import {Input, 
+        Form, 
+        Button, 
+        Checkbox, 
+        Col, 
+        Row} from 'antd';
+
+import './editor-modal.css';
+
+const layout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 22 },
+};
+
+
 
 export default function EditorModal(props) {
 
@@ -10,32 +24,27 @@ export default function EditorModal(props) {
   const [director, setDirector] = states.director;
   const [release, setRelease] = states.release;
   const [imageURL, setImageURL] = states.imageURL;
+  const [plot, setPlot] = states.plot;
 
-  const { handleSubmit, register, errors } = useForm();
-
-  const onSubmit = values => {
-    setTitle(values.Title);
-    setDirector(values.Director);
-    setRelease(values.release);
-
-    let categoryList;
-    if (!values.categories && values.newcategory !== "") {
-      categoryList = [values.newcategory];
-    } else if (values.categories) {
-      categoryList = typeof values.categories === "string" ? [values.categories] : values.categories;
-      if (values.newcategory !== "") {
-        categoryList.push(values.newcategory);
-      }
+  const onFinish = values => {
+    console.log('Received values of form: ', values);
+    setTitle(values.title);
+    if(values.newCategory){
+      values.categories.push(values.newCategory);
     }
-    setCategories(categoryList);
-
+    setCategories(values.categories);
+    console.log(categories);
+    setDirector(values.director);
+    setRelease(values.release);
+    setImageURL(values.imageURL);
+    setPlot(values.plot);
     update(movie.id, {
-      title: values.Title,
-      categories: categoryList,
-      director: values.Director,
-      plot: movie.plot,
+      title: values.title,
+      categories: values.categories,
+      director: values.director,
+      plot: values.plot,
       releaseDate: values.release,
-      imageURL: movie.imageURL
+      imageURL: values.imageURL
     });
     modalRef.current.closeModal();
   };
@@ -44,41 +53,64 @@ export default function EditorModal(props) {
     <Modal id="editor-modal" ref={modalRef}>
 
       <div className="modal-header">
-        <span className="close-span" onClick={() => modalRef.current.closeModal()}><strong>X</strong></span>
+        <span className="close-span" onClick={() => modalRef.current.closeModal()}><strong>&times;</strong></span>
       </div>
 
       <div className="modal-body">
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <h1>Edit your movie</h1>
+        <Form {...layout} onFinish={onFinish} initialValues={{
+          title: title,
+          director: director,
+          release: release,
+          categories: categories,
+          imageURL: imageURL,
+          plot: plot
+        }} >
 
-          <label >Movie title: </label><br />
-          <input name="Title" defaultValue={title} ref={register} /><br /><br />
+          <Form.Item name="title" label="Title" rules={[{ required: true, message: 'Please input your username!' }]}>
+            <Input  />
+          </Form.Item>
 
-          <label >Director: </label><br />
-          <input name="Director" defaultValue={director} ref={register} /><br /><br />
+          <Form.Item name="director" label="Director">
+            <Input  />
+          </Form.Item>
 
-          <label>Categories: </label><br />
-          {categories && categories.map((category, i) => (
-            <React.Fragment key={i}>
-              <input type="checkbox" name="categories" defaultValue={category} defaultChecked={true} ref={register} />
-              <label> {category}  </label>
-            </React.Fragment>
-          ))}
-          <br />
+          <Form.Item name="release" label="Release">
+            <Input  />
+          </Form.Item>
 
-          <input name="newcategory" autoComplete="off" placeholder="New category" ref={register} /><br /><br />
-          <label>Release year: </label><br />
-          <input name="release" type="number" defaultValue={release} ref={register({ min: 1900, max: 2020 })} /><br /><br />
+          <Form.Item name="categories" label="Categories">
+            <Checkbox.Group>              
+                {categories && categories.map((category, i) => (
+                  <Row>
+                    <Col span={30} key={i}>
+                      <Checkbox value={category} style={{ lineHeight: '32px' }} defaultChecked={true}>
+                        {category}
+                      </Checkbox>
+                    </Col>
+                  </Row>
+                ))}              
+            </Checkbox.Group>
+          </Form.Item>
 
-          {errors.release && 'Year must be between 1900 and 2020'}
-          <br />
-          <br />
+          <Form.Item name="newCategory" label="New Category">
+            <Input  />
+          </Form.Item>
 
-          <button type="submit">Update</button>
-        </form>
+          <Form.Item name="plot" label="Plot">
+            <Input.TextArea />
+          </Form.Item>
+
+          <Form.Item name="imageURL" label="Image URL">
+            <Input  />
+          </Form.Item>
+
+          <Button type="primary" htmlType="submit">Update</Button>
+        </Form>
       </div>
 
       <div className="modal-footer">
-        <button onClick={() => modalRef.current.closeModal()}>Cancel</button>
+        <Button type="dashed" onClick={() => modalRef.current.closeModal()}>Cancel</Button>
       </div>
 
     </Modal>
