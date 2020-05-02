@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.1.4",
     "axios": "^0.19.2",
+    "rc-tween-one": "^2.6.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-flex-columns": "^0.4.3",

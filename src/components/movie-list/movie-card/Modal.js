@@ -25,14 +25,15 @@ const ModalBox = styled.div`
   font-size: 1.8em;
   position: relative;
   padding: 2%;
+  padding-bottom: 5%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 80%;
+  height: 60%;
   width: 45%;
   background-color: white;
   box-shadow: 0 0 10px rgba(0,0,0,0.25);
-  border-radius: 10px;
+  border-radius: 2px;
   z-index: 101;
   overflow-y: auto;
 `

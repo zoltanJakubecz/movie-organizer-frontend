@@ -17,6 +17,11 @@
 
 .movie-card-title {
   font-weight: bold;
+  min-width: 70%;
+}
+
+.tags {
+  margin-top: 1rem;;
   min-width: 50%;
 }
 
@@ -38,4 +43,9 @@
 
 .movie-card-details-plot {
   text-align: justify;
+}
+
+.site-tag-plus {
+  background: #fff;
+  border-style: dashed;
 }

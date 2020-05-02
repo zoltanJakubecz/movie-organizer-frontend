@@ -3,6 +3,7 @@ import { Card, Collapse } from 'antd';
 import Button from 'antd/es/button';
 import { MovieContext } from '../../../contexts/MovieContext';
 import EditorModal from './EditorModal';
+import Tags from './Tags'
 
 import './movie-card.css';
 
@@ -57,13 +58,16 @@ export default function MovieCard(props) {
           <div><Button type="dashed" onClick={openModal}>Edit</Button></div>
           <div>
             {!isDeleteActive ?
-              <Button type="dashed" onClick={handleShowDelete}>Delete</Button> :
+              <Button danger type="dashed" onClick={handleShowDelete}>Delete</Button> :
               <span>
                 <Button onClick={handleHideDelete}>No</Button>
                 <Button onClick={handleDelete}>Yes</Button> Are you sure?
               </span>
             }
           </div>
+          
+          <div className="tags"><Tags categories={categories} setCategories={setCategories} /></div>
+          
         </div>
 
         <div className="movie-card-details">
@@ -72,7 +76,7 @@ export default function MovieCard(props) {
               <div className="movie-card-details-header">
                 <img src={imageURL} alt='Kukutyin' height='300' />
                 <div className="movie-card-details-header-info">
-                  <div>Categories: {categories ? categories.join(", ") : ""}</div>
+                  {/* <div>Categories: {categories ? categories.join(", ") : ""}</div> */}
                   <div>Director: {director}</div>
                 </div>
               </div>

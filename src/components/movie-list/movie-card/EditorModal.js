@@ -3,15 +3,13 @@ import Modal from './Modal';
 import {Input, 
         Form, 
         Button, 
-        Checkbox, 
-        Col, 
-        Row} from 'antd';
+        } from 'antd';
 
 import './editor-modal.css';
 
 const layout = {
   labelCol: { span: 4 },
-  wrapperCol: { span: 22 },
+  wrapperCol: { span: 18 },
 };
 
 
@@ -26,6 +24,7 @@ export default function EditorModal(props) {
   const [imageURL, setImageURL] = states.imageURL;
   const [plot, setPlot] = states.plot;
 
+
   const onFinish = values => {
     console.log('Received values of form: ', values);
     setTitle(values.title);
@@ -38,6 +37,7 @@ export default function EditorModal(props) {
     setRelease(values.release);
     setImageURL(values.imageURL);
     setPlot(values.plot);
+
     update(movie.id, {
       title: values.title,
       categories: values.categories,
@@ -79,24 +79,6 @@ export default function EditorModal(props) {
             <Input  />
           </Form.Item>
 
-          <Form.Item name="categories" label="Categories">
-            <Checkbox.Group>              
-                {categories && categories.map((category, i) => (
-                  <Row>
-                    <Col span={30} key={i}>
-                      <Checkbox value={category} style={{ lineHeight: '32px' }} defaultChecked={true}>
-                        {category}
-                      </Checkbox>
-                    </Col>
-                  </Row>
-                ))}              
-            </Checkbox.Group>
-          </Form.Item>
-
-          <Form.Item name="newCategory" label="New Category">
-            <Input  />
-          </Form.Item>
-
           <Form.Item name="plot" label="Plot">
             <Input.TextArea />
           </Form.Item>
@@ -105,12 +87,14 @@ export default function EditorModal(props) {
             <Input  />
           </Form.Item>
 
-          <Button type="primary" htmlType="submit">Update</Button>
-        </Form>
-      </div>
+          
 
-      <div className="modal-footer">
-        <Button type="dashed" onClick={() => modalRef.current.closeModal()}>Cancel</Button>
+        <div className="modal-footer">
+          <Button className="update-button" type="primary" htmlType="submit">Update</Button>
+
+          <Button type="dashed" onClick={() => modalRef.current.closeModal()}>Cancel</Button>
+        </div>
+      </Form>
       </div>
 
     </Modal>
