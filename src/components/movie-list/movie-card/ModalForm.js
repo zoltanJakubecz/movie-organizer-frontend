@@ -57,7 +57,7 @@ export const ModalForm = ({ visible, onCreate, onCancel, movie, states }) => {
           </Form.Item>
 
           <Form.Item name="plot" label="Plot">
-            <Input />
+            <Input.TextArea />
           </Form.Item>
 
           <Form.Item name="imageURL" label="Image URL">
