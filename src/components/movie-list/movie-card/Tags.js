@@ -5,7 +5,7 @@ import { PlusOutlined } from '@ant-design/icons';
 
 class Tags extends React.Component {
   state = {
-    tags: this.props.categories,
+    tags: this.props.categories.map(({ name }) => name),
     inputVisible: false,
     inputValue: '',
   };
