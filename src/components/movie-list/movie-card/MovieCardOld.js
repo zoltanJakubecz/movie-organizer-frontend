@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react';
 import { Card, Collapse } from 'antd';
 import Button from 'antd/es/button';
 import { MovieContext } from '../../../contexts/MovieContext';
+import EditorModal from './EditorModal';
 import Tags from './Tags'
-import ModalForm from './ModalForm';
 
 import './movie-card.css';
 
@@ -28,31 +28,11 @@ export default function MovieCard(props) {
   const [release, setRelease] = useState(mReleaseDate);
   const [imageURL, setImageURL] = useState(mImageURL);
   const [plot, setPlot] = useState(mPlot);
-  const [visible, setVisible] = useState(false);
 
-  const onCreate = values => {
-    console.log('Received values of form: ', values);
-
-    
-    console.log(categories);
-    setTitle(values.title);
-    setDirector(values.director);
-    setRelease(values.release);
-    setImageURL(values.imageURL);
-    setPlot(values.plot);
-
-    actions.update(props.movie.id, {
-      title: values.title,
-      categories:categories,
-      director: values.director,
-      plot: values.plot,
-      releaseDate: values.release,
-      imageURL: values.imageURL
-    });
-
-    setVisible(false);
+  const modalRef = React.useRef();
+  const openModal = () => {
+    modalRef.current.openModal()
   };
-
 
   const { Panel } = Collapse;
 
@@ -75,27 +55,7 @@ export default function MovieCard(props) {
       <Card className="movie-card">
         <div className="movie-card-header">
           <div className="movie-card-title">{title} ({release})</div>
-
-          <div><Button type="dashed" onClick={ () => { setVisible(true); } }>Edit</Button></div>
-          
-          <ModalForm
-            visible={visible}
-            onCreate={onCreate}
-            // movie={{ id: mId, plot: mPlot, imageURL: mImageURL }}
-            states={{
-              title: [title, setTitle],
-              categories: [categories, setCategories],
-              director: [director, setDirector],
-              release: [release, setRelease],
-              imageURL: [imageURL, setImageURL],
-              plot: [plot, setPlot]
-            }}
-            update={actions.update}
-            onCancel={() => {
-            setVisible(false); 
-            }}
-          />
-
+          <div><Button type="dashed" onClick={openModal}>Edit</Button></div>
           <div>
             {!isDeleteActive ?
               <Button danger type="dashed" onClick={handleShowDelete}>Delete</Button> :
@@ -116,16 +76,30 @@ export default function MovieCard(props) {
               <div className="movie-card-details-header">
                 <img src={imageURL} alt='Kukutyin' height='300' />
                 <div className="movie-card-details-header-info">
+                  {/* <div>Categories: {categories ? categories.join(", ") : ""}</div> */}
                   <div>Director: {director}</div>
                 </div>
               </div>
-              <div className="movie-card-details-plot">{plot}</div>
+              <div className="movie-card-details-plot">{mPlot}</div>
             </Panel>
           </Collapse>
         </div>
 
       </Card>
 
+      <EditorModal
+        modalRef={modalRef}
+        movie={{ id: mId, plot: mPlot, imageURL: mImageURL }}
+        states={{
+          title: [title, setTitle],
+          categories: [categories, setCategories],
+          director: [director, setDirector],
+          release: [release, setRelease],
+          imageURL: [imageURL, setImageURL],
+          plot: [plot, setPlot]
+        }}
+        update={actions.update}
+      />
     </React.Fragment>
   )
 }
