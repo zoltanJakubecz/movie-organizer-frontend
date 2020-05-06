@@ -36,8 +36,8 @@ export const MovieProvider = props => {
     await axios.put("http://localhost:8080/api/movies/" + id, movie);
   }
 
-  const attachCategory = function (movieId, category) {
-    axios.post(`http://localhost:8080/api/movies/${movieId}/categories`, category, {
+  const attachCategory = async function (movieId, category) {
+    return await axios.post(`http://localhost:8080/api/movies/${movieId}/categories`, category, {
       headers: {
         'Content-Type': 'text/plain'
       }

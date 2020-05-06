@@ -15,11 +15,11 @@ class Tags extends React.Component {
   }
 
   handleClose = removedTag => {
-    const tags = this.state.tags.filter(tag => tag !== removedTag);
-    const categoryId = this.getCategory(removedTag).id;
-    this.props.actions.detachFromMovie(this.props.movieId, categoryId);
-    this.props.setCategories(tags);
-    this.setState({ tags });
+    const filteredTags = this.state.tags.filter(tag => tag !== removedTag);
+    const removedCategory = this.getCategory(removedTag);
+    this.props.actions.detachFromMovie(this.props.movieId, removedCategory.id);
+    this.setState({ tags: filteredTags });
+    this.props.setCategories(this.props.categories.filter(c => c !== removedCategory));
   };
 
   showInput = () => {
@@ -30,20 +30,21 @@ class Tags extends React.Component {
     this.setState({ inputValue: e.target.value });
   };
 
-  handleInputConfirm = () => {
-    const { inputValue } = this.state;
-    let { tags } = this.state;
-    if (inputValue && tags.indexOf(inputValue) === -1) {
-      tags = [...tags, inputValue];
+  handleInputConfirm = async () => {
+    const { tags, inputValue } = this.state;
+    if (inputValue === "" || tags.includes(inputValue)) {
+      this.setState({ tags, inputVisible: false, inputValue: "" })
+      return;
     }
-    console.log(tags);
-    this.props.actions.attachToMovie(this.props.movieId, inputValue);
-    this.props.setCategories(tags);
+    const res = await this.props.actions.attachToMovie(this.props.movieId, inputValue);
+    const attachedCategory = res.data;
+    const extendedTags = [...tags, attachedCategory.name];
     this.setState({
-      tags,
+      tags: extendedTags,
       inputVisible: false,
       inputValue: '',
     });
+    this.props.setCategories([...this.props.categories, attachedCategory]);
   };
 
   saveInputRef = input => (this.input = input);
