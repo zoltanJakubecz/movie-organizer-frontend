@@ -6,6 +6,7 @@ import './App.css';
 import PageHeader from './components/page-header/PageHeader';
 import { MovieProvider } from './contexts/MovieContext';
 import AppContent from './components/AppContent';
+import PersonsContent from './components/PersonsContent';
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
       <div className="App">
         <PageHeader />
         <MovieProvider>
-          <Route path="/" component={AppContent} />
+          <Route exact path="/" component={AppContent} />
+          <Route exact path="/movies" component={AppContent} />
+          <Route exact path="/artists" componenet={PersonsContent} />
         </MovieProvider>
       </div>
     </Router>
