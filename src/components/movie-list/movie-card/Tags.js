@@ -10,9 +10,14 @@ class Tags extends React.Component {
     inputValue: '',
   };
 
+  getCategory = name => {
+    return this.props.categories.find(category => category.name === name);
+  }
+
   handleClose = removedTag => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
-    console.log(tags);
+    const categoryId = this.getCategory(removedTag).id;
+    this.props.actions.detachFromMovie(this.props.movieId, categoryId);
     this.props.setCategories(tags);
     this.setState({ tags });
   };
@@ -32,6 +37,7 @@ class Tags extends React.Component {
       tags = [...tags, inputValue];
     }
     console.log(tags);
+    this.props.actions.attachToMovie(this.props.movieId, inputValue);
     this.props.setCategories(tags);
     this.setState({
       tags,

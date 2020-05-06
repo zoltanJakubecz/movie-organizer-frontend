@@ -36,6 +36,18 @@ export const MovieProvider = props => {
     await axios.put("http://localhost:8080/api/movies/" + id, movie);
   }
 
+  const attachCategory = function (movieId, category) {
+    axios.post(`http://localhost:8080/api/movies/${movieId}/categories`, category, {
+      headers: {
+        'Content-Type': 'text/plain'
+      }
+    });
+  }
+
+  const detachCategory = function (movieId, categoryId) {
+    axios.delete(`http://localhost:8080/api/movies/${movieId}/categories/${categoryId}`);
+  }
+
   async function handleDeleteFromContext(id) {
     await axios.delete("http://localhost:8080/api/movies/?id=" + id);
     await loadPage(data.page);
@@ -50,7 +62,11 @@ export const MovieProvider = props => {
         loadPage,
         add,
         update,
-        delete: handleDeleteFromContext
+        delete: handleDeleteFromContext,
+        categories: {
+          detachFromMovie: detachCategory,
+          attachToMovie: attachCategory
+        }
       }
     }}>
       {props.children}

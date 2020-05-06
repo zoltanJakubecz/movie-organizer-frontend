@@ -33,7 +33,7 @@ export default function MovieCard(props) {
   const onCreate = values => {
     console.log('Received values of form: ', values);
 
-    
+
     console.log(categories);
     setTitle(values.title);
     setDirector(values.director);
@@ -43,7 +43,7 @@ export default function MovieCard(props) {
 
     actions.update(props.movie.id, {
       title: values.title,
-      categories:categories,
+      categories: categories,
       director: values.director,
       plot: values.plot,
       releaseDate: values.release,
@@ -76,8 +76,8 @@ export default function MovieCard(props) {
         <div className="movie-card-header">
           <div className="movie-card-title">{title} ({release})</div>
 
-          <div><Button type="dashed" onClick={ () => { setVisible(true); } }>Edit</Button></div>
-          
+          <div><Button type="dashed" onClick={() => { setVisible(true); }}>Edit</Button></div>
+
           <ModalForm
             visible={visible}
             onCreate={onCreate}
@@ -92,7 +92,7 @@ export default function MovieCard(props) {
             }}
             update={actions.update}
             onCancel={() => {
-            setVisible(false); 
+              setVisible(false);
             }}
           />
 
@@ -105,9 +105,16 @@ export default function MovieCard(props) {
               </span>
             }
           </div>
-          
-          <div className="tags"><Tags categories={categories} setCategories={setCategories} /></div>
-          
+
+          <div className="tags">
+            <Tags
+              movieId={mId}
+              actions={actions.categories}
+              categories={categories}
+              setCategories={setCategories}
+            />
+          </div>
+
         </div>
 
         <div className="movie-card-details">
