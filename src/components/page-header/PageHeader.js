@@ -10,10 +10,10 @@ const StyledHeader = styled(AntPageHeader)`
 
 export default function PageHeader() {
   return (
-    
+
     <StyledHeader
       className="pageHeader"
-      title="Movie Organizer v0.0.1"
+      title="Movie Organizer v0.0.2"
       ghost={false}
     >
       <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
@@ -29,6 +29,6 @@ export default function PageHeader() {
         </Menu.Item>
       </Menu>
     </StyledHeader>
-    
+
   )
 }
