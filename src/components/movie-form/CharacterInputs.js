@@ -22,7 +22,7 @@ export default function CharacterInputs(props) {
                 key={field.key}
               >
                 <Form.Item
-                  name={[field.name, "character"]}
+                  name={[field.name, "movieCharacter"]}
                   fieldKey={[field.fieldKey, "character"]}
                   rules={rules}
                   noStyle

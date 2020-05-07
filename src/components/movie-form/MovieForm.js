@@ -35,7 +35,8 @@ export default function MovieForm(props) {
   const onFinish = async function (values) {
     try {
       const movie = Object.assign(values, {
-        releaseDate: parseInt(values.releaseDate)
+        releaseDate: parseInt(values.releaseDate),
+        characterActorMovieMaps: values.characters
       });
       actions.add(movie);
     } catch (error) {
