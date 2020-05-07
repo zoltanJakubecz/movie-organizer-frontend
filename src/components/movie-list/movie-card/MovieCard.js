@@ -16,6 +16,7 @@ export default function MovieCard(props) {
     id: mId,
     title: mTitle,
     categories: mCategories,
+    characterActorMovieMaps: characterMaps,
     director: mDirector,
     releaseDate: mReleaseDate,
     imageURL: mImageURL,
@@ -123,7 +124,17 @@ export default function MovieCard(props) {
               <div className="movie-card-details-header">
                 <img src={imageURL} alt='Kukutyin' height='300' />
                 <div className="movie-card-details-header-info">
-                  <div>Director: {director}</div>
+                  {director && <div>Director: {director}</div>}
+                  {characterMaps.length > 0 && (
+                    <div>
+                      <div>Characters:</div>
+                      <ul>
+                        {characterMaps.map(({ movieCharacter: character, actor }) => (
+                          <li key={character.id}>{character.name}{actor && (" - played by " + actor.name)}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="movie-card-details-plot">{plot}</div>
