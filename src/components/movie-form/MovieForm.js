@@ -5,6 +5,7 @@ import CategoryInputs from './CategoryInputs';
 
 import './movie-form.css';
 import { MovieContext } from '../../contexts/MovieContext';
+import CharacterInputs from './CharacterInputs';
 
 export default function MovieForm(props) {
 
@@ -71,6 +72,7 @@ export default function MovieForm(props) {
         </Form.Item>
 
         <CategoryInputs layout={layout} />
+        <CharacterInputs layout={layout} />
 
         <Form.Item {...layout.noLabel}>
           <Button type="primary" htmlType="submit">

@@ -29,7 +29,7 @@ export default function CategoryInputs(props) {
                   <Input placeholder="new category" style={{ width: '60%' }} />
                 </Form.Item>
 
-                {fields.length > 1 ? (
+                {fields.length > 0 ? (
                   <MinusCircleOutlined
                     className="dynamic-delete-button"
                     style={{ margin: '0 8px' }}
