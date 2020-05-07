@@ -49,7 +49,7 @@ export const MovieProvider = props => {
   }
 
   async function handleDeleteFromContext(id) {
-    await axios.delete("http://localhost:8080/api/movies/?id=" + id);
+    await axios.delete("http://localhost:8080/api/movies/" + id);
     await loadPage(data.page);
   }
 
