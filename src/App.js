@@ -16,7 +16,7 @@ function App() {
         <MovieProvider>
           <Route exact path="/" component={AppContent} />
           <Route exact path="/movies" component={AppContent} />
-          <Route exact path="/artists" componenet={PersonsContent} />
+          <Route exact path="/artists" component={PersonsContent} />
         </MovieProvider>
       </div>
     </Router>

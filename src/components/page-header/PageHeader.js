@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { PageHeader as AntPageHeader, Menu } from 'antd';
+import { Link } from 'react-router-dom';
 
 const StyledHeader = styled(AntPageHeader)`
   background-color: var(--primary-bg-color);
@@ -17,13 +18,13 @@ export default function PageHeader() {
     >
       <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
         <Menu.Item key="1">
-        <a rel="noopener noreferrer" href="/movies">
+        <Link to="/movies">
         Movies
-      </a></Menu.Item>
+      </Link></Menu.Item>
         <Menu.Item key="2">
-        <a rel="noopener noreferrer" href="/artists">
+        <Link to="/artists">
         Persons
-      </a>
+      </Link>
         </Menu.Item>
       </Menu>
     </StyledHeader>
