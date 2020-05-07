@@ -5,12 +5,12 @@ import ActorInputs from './ActorInputs';
 import DirectorInputs from './DirectorInputs';
 
 import './person-form.css';
-import { MovieContext } from '../../contexts/MovieContext';
+import { PersonContext } from '../../contexts/PersonContext';
 
 export default function PersonForm(props) {
 
   const [isOpen, setIsOpen] = props.openState;
-  const { actions } = useContext(MovieContext);
+  // const { actions } = useContext(PersonContext);
   const [form] = Form.useForm();
 
   const layout = {
@@ -34,7 +34,7 @@ export default function PersonForm(props) {
 
   const onFinish = async function (values) {
     try {
-      const movie = Object.assign(values, {
+      const person = Object.assign(values, {
         releaseDate: parseInt(values.releaseDate)
       });
     //   actions.add(movie);

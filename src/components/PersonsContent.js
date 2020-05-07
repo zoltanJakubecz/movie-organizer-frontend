@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import ControlPanel from './control-panel/ControlPanel';
-import MovieList from './movie-list/MovieList';
+import PersonList from './person-list/PersonList';
 
 import './app-content.css';
 import PersonForm from './person-form/PersonForm';
@@ -14,7 +14,7 @@ export default function PersonsContent() {
     <div className="appContent">
       <ControlPanel controls={{ movieFormState }} />
       <PersonForm openState={movieFormState} />
-      {/* <Route path="/" component={MovieList} /> */}
+      <Route path="/" component={PersonList} />
     </div>
   )
 }
