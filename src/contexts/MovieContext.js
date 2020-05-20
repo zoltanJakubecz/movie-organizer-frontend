@@ -18,8 +18,10 @@ export const MovieProvider = props => {
 
   useEffect(() => {
     async function getData() {
-      const res = await axios.get("http://localhost:8080/api/movies/?page=1", requestConfig);
-      setData(Object.assign(res.data, { page: 1 }));
+      const res = await axios.get("http://localhost:8080/api/movies/?page=1", requestConfig)
+      if (res !== undefined) {
+        setData(Object.assign(res.data, { page: 1 }));
+      }
     }
     getData();
   }, []);

@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button } from 'antd';
 import RegistrationModalForm from './RegistrationModalForm';
+import { UserContext } from '../../../contexts/UserContext';
 
 export default function Registration() {
 
   const [modalOpen, setModalOpen] = useState(false);
+  const { register } = useContext(UserContext);
 
-  const onSubmit = (values) => {
-    console.log("Received values: ");
-    console.log(values)
-    const { username } = values;
-    return username !== "user";
+  const onSubmit = async values => {
+    return await register({
+      username: values.username,
+      password: values.password
+    });
   }
 
   return (

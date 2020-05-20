@@ -22,19 +22,17 @@ const ModalForm = ({ visible, onSubmit, onCancel }) => {
       onOk={() => {
         form
           .validateFields()
-          .then(values => {
-            const usernameValid = onSubmit(values);
+          .then(async values => {
+            const usernameValid = await onSubmit(values);
             setUsernameValidation({
               checked: true,
               valid: usernameValid
             })
             if (usernameValid) {
               form.resetFields();
+              onCancel();
             }
           })
-          .catch(info => {
-            console.log('Validate Failed:', info);
-          });
       }}
     >
 
