@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LoginForm from './LoginForm';
 
-import './page-header.css';
 
 const StyledHeader = styled(AntPageHeader)`
   background-color: var(--primary-bg-color);
