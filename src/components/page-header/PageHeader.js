@@ -15,19 +15,14 @@ const StyledHeader = styled(AntPageHeader)`
 export default function PageHeader() {
 
 
-
-  
-
   return (
 
     <StyledHeader
       className="pageHeader"
       title="Movie Organizer v0.0.2"
       ghost={false}
+      extra={<LoginForm />}
     >
-      <div className="login-form">
-        <LoginForm />
-      </div>
       
       <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
         <Menu.Item key="1">

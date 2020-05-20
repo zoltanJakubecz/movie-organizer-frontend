@@ -70,6 +70,9 @@ const LoginForm = () => {
           </Button>
         )}
       </Form.Item>
+      <Form.Item>
+          <Button>Register</Button>
+      </Form.Item>
     </Form>
   );
 };
