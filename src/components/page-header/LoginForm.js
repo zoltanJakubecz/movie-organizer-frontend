@@ -3,6 +3,7 @@ import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { UserContext } from '../../contexts/UserContext';
+import Registration from './registration/Registration';
 
 
 // const requestConfig = {
@@ -21,8 +22,6 @@ const LoginForm = () => {
 
   const { username, login, logout } = useContext(UserContext);
 
-
- 
   const onFinish = async (values) => {
 
     login(values.username, values.password);
@@ -78,7 +77,7 @@ const LoginForm = () => {
         )}
       </Form.Item>
       <Form.Item>
-          <Button>Register</Button>
+        <Registration />
       </Form.Item>
     </Form>
   );
