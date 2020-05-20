@@ -18,8 +18,7 @@ function App() {
         <PersonProvider>
         <MovieProvider>
         <PageHeader />
-          <Route exact path="/" component={AppContent} />
-          <Route exact path="/movies" component={AppContent} />
+          <Route exact path={["/", "/movies"]} component={AppContent} />
           <Route exact path="/artists" component={PersonsContent} />
         </MovieProvider>
         </PersonProvider>

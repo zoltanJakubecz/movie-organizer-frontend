@@ -1,15 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import axios from 'axios';
 import { UserContext } from '../../contexts/UserContext';
 
-
-// const requestConfig = {
-//     withCredentials: true, headers: {
-//       "Access-Control-Allow-Credentials": "true"
-//     },
-//   }
 
 const LoginForm = () => {
   const [form] = Form.useForm();
@@ -26,15 +19,17 @@ const LoginForm = () => {
   const onFinish = async (values) => {
 
     login(values.username, values.password);
-
-    // axios.post("http://localhost:8080/auth/login", {
-    //     "username": values.username,
-    //     "password": values.password
-    //   },requestConfig);
-
-    console.log('Finish:', values);
+    // console.log('Finish:', values);
   };
 
+
+  const signout = async () => {
+    logout();
+  }
+
+  // console.log(username);
+
+  if(!username){
   return (
     <Form form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
       <Form.Item
@@ -82,6 +77,18 @@ const LoginForm = () => {
       </Form.Item>
     </Form>
   );
+        } else {
+            return (
+              <Form>
+                <Form.Item>
+                  Logged in as {username} 
+                  <Button onClick={signout}>Logout</Button>
+                </Form.Item>
+              </Form>
+                
+                
+            )
+        }
 };
 
 export default LoginForm;
