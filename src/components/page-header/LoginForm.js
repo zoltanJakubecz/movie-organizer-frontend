@@ -1,39 +1,34 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import axios from 'axios';
 import { UserContext } from '../../contexts/UserContext';
 import Registration from './registration/Registration';
 
 
-// const requestConfig = {
-//     withCredentials: true, headers: {
-//       "Access-Control-Allow-Credentials": "true"
-//     },
-//   }
-
 const LoginForm = () => {
   const [form] = Form.useForm();
   const [, forceUpdate] = useState(); // To disable submit button at the beginning.
-
+  
+  
+  const { username, login, logout } = useContext(UserContext);
+  
   useEffect(() => {
     forceUpdate({});
-  }, []);
-
-  const { username, login, logout } = useContext(UserContext);
+  }, [username]);
 
   const onFinish = async (values) => {
 
     login(values.username, values.password);
-
-    // axios.post("http://localhost:8080/auth/login", {
-    //     "username": values.username,
-    //     "password": values.password
-    //   },requestConfig);
-
-    console.log('Finish:', values);
   };
 
+
+  const signout = async () => {
+    logout();
+    form.resetFields();
+  }
+
+
+  if(!username){
   return (
     <Form form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
       <Form.Item
@@ -81,6 +76,18 @@ const LoginForm = () => {
       </Form.Item>
     </Form>
   );
+        } else {
+            return (
+              <Form form={form} name="horizontal_login" layout="inline">
+                <Form.Item>
+                  <span style={{"paddingRight" : "2em"}}>Logged in as {username}</span> 
+                  <Button onClick={signout}>Logout</Button>
+                </Form.Item>
+              </Form>
+                
+                
+            )
+        }
 };
 
 export default LoginForm;

@@ -1,5 +1,7 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import axios from 'axios';
+import {UserContext} from './UserContext';
+
 
 export const MovieContext = createContext();
 
@@ -16,6 +18,9 @@ export const MovieProvider = props => {
     movies: [],
   });
 
+  const  {username} = useContext(UserContext);
+
+
   useEffect(() => {
     async function getData() {
       const res = await axios.get("http://localhost:8080/api/movies/?page=1", requestConfig)
@@ -23,8 +28,19 @@ export const MovieProvider = props => {
         setData(Object.assign(res.data, { page: 1 }));
       }
     }
+    if(username){
+      getData();
+    } else {
+      setData({
+        totalMovieCount: 0,
+        page: 1,
+        movies: [],
+      }
+
+      )
+    }
     getData();
-  }, []);
+  }, [username]);
 
   const loadPage = async function (page) {
     const res = await axios.get("http://localhost:8080/api/movies/?page=" + page, requestConfig);
