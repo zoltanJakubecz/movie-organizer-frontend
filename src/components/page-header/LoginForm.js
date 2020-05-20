@@ -7,27 +7,25 @@ import { UserContext } from '../../contexts/UserContext';
 const LoginForm = () => {
   const [form] = Form.useForm();
   const [, forceUpdate] = useState(); // To disable submit button at the beginning.
-
+  
+  
+  const { username, login, logout } = useContext(UserContext);
+  
   useEffect(() => {
     forceUpdate({});
-  }, []);
+  }, [username]);
 
-  const { username, login, logout } = useContext(UserContext);
-
-
- 
   const onFinish = async (values) => {
 
     login(values.username, values.password);
-    // console.log('Finish:', values);
   };
 
 
   const signout = async () => {
     logout();
+    form.resetFields();
   }
 
-  // console.log(username);
 
   if(!username){
   return (
@@ -79,9 +77,9 @@ const LoginForm = () => {
   );
         } else {
             return (
-              <Form>
+              <Form form={form} name="horizontal_login" layout="inline">
                 <Form.Item>
-                  Logged in as {username} 
+                  <span style={{"paddingRight" : "2em"}}>Logged in as {username}</span> 
                   <Button onClick={signout}>Logout</Button>
                 </Form.Item>
               </Form>
