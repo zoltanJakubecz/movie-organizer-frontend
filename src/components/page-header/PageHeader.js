@@ -16,6 +16,7 @@ export default function PageHeader() {
 
   return (
 
+<>
     <StyledHeader
       className="pageHeader"
       title="Movie Organizer v0.0.2"
@@ -36,6 +37,6 @@ export default function PageHeader() {
         </Menu.Item>
       </Menu>
     </StyledHeader>
-
+</>
   )
 }

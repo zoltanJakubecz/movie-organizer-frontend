@@ -8,19 +8,22 @@ import { MovieProvider } from './contexts/MovieContext';
 import { PersonProvider } from './contexts/PersonContext';
 import AppContent from './components/AppContent';
 import PersonsContent from './components/PersonsContent';
+import { UserProvider } from './contexts/UserContext';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <PageHeader />
+        <UserProvider>
         <PersonProvider>
         <MovieProvider>
+        <PageHeader />
           <Route exact path="/" component={AppContent} />
           <Route exact path="/movies" component={AppContent} />
           <Route exact path="/artists" component={PersonsContent} />
         </MovieProvider>
         </PersonProvider>
+        </UserProvider>
       </div>
     </Router>
   );

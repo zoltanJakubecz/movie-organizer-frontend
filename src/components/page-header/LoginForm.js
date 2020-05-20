@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { UserContext } from '../../contexts/UserContext';
 
 
-const requestConfig = {
-    withCredentials: true, headers: {
-      "Access-Control-Allow-Credentials": "true"
-    },
-  }
+// const requestConfig = {
+//     withCredentials: true, headers: {
+//       "Access-Control-Allow-Credentials": "true"
+//     },
+//   }
 
 const LoginForm = () => {
   const [form] = Form.useForm();
@@ -18,12 +19,18 @@ const LoginForm = () => {
     forceUpdate({});
   }, []);
 
+  const { username, login, logout } = useContext(UserContext);
+
+
+ 
   const onFinish = async (values) => {
 
-    axios.post("http://localhost:8080/auth/login", {
-        "username": values.username,
-        "password": values.password
-      },requestConfig);
+    login(values.username, values.password);
+
+    // axios.post("http://localhost:8080/auth/login", {
+    //     "username": values.username,
+    //     "password": values.password
+    //   },requestConfig);
 
     console.log('Finish:', values);
   };
