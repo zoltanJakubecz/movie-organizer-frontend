@@ -4,6 +4,12 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 
+const requestConfig = {
+    withCredentials: true, headers: {
+      "Access-Control-Allow-Credentials": "true"
+    },
+  }
+
 const LoginForm = () => {
   const [form] = Form.useForm();
   const [, forceUpdate] = useState(); // To disable submit button at the beginning.
@@ -17,7 +23,7 @@ const LoginForm = () => {
     axios.post("http://localhost:8080/auth/login", {
         "username": values.username,
         "password": values.password
-      });
+      },requestConfig);
 
     console.log('Finish:', values);
   };
