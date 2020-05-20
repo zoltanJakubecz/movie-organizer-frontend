@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PageHeader as AntPageHeader, Menu } from 'antd';
+import { PageHeader as AntPageHeader, Menu, Button } from 'antd';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import LoginForm from './LoginForm';
+
+import './page-header.css';
 
 const StyledHeader = styled(AntPageHeader)`
   background-color: var(--primary-bg-color);
@@ -9,6 +13,11 @@ const StyledHeader = styled(AntPageHeader)`
 `;
 
 export default function PageHeader() {
+
+
+
+  
+
   return (
 
     <StyledHeader
@@ -16,6 +25,10 @@ export default function PageHeader() {
       title="Movie Organizer v0.0.2"
       ghost={false}
     >
+      <div className="login-form">
+        <LoginForm />
+      </div>
+      
       <Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
         <Menu.Item key="1">
           <Link to="/movies">
