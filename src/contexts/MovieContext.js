@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import axios from 'axios';
-import {UserContext} from './UserContext';
+import { UserContext } from './UserContext';
 
 
 export const MovieContext = createContext();
@@ -18,8 +18,7 @@ export const MovieProvider = props => {
     movies: [],
   });
 
-  const  {username} = useContext(UserContext);
-
+  const { username } = useContext(UserContext);
 
   useEffect(() => {
     async function getData() {
@@ -28,7 +27,7 @@ export const MovieProvider = props => {
         setData(Object.assign(res.data, { page: 1 }));
       }
     }
-    if(username){
+    if (username) {
       getData();
     } else {
       setData({
@@ -39,7 +38,6 @@ export const MovieProvider = props => {
 
       )
     }
-    getData();
   }, [username]);
 
   const loadPage = async function (page) {
