@@ -6,9 +6,7 @@ import { UserContext } from './UserContext';
 export const MovieContext = createContext();
 
 const requestConfig = {
-  withCredentials: true, headers: {
-    "Access-Control-Allow-Credentials": "true"
-  },
+  withCredentials: true,
 }
 
 export const MovieProvider = props => {
