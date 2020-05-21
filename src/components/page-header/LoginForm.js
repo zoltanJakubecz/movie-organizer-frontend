@@ -33,23 +33,13 @@ const LoginForm = () => {
       <Form form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
         <Form.Item
           name="username"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your username!',
-            },
-          ]}
+          
         >
           <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
         </Form.Item>
         <Form.Item
           name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
+          
         >
           <Input
             prefix={<LockOutlined className="site-form-item-icon" />}
