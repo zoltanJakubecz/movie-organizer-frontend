@@ -7,23 +7,13 @@ export const UserProvider = (props) => {
 
     const [data, setData] = useState({});
 
-    // useEffect(() => async () => {
-    //     const res = await axios.get("http://localhost:8080/users/whoisin", { withCredentials: true });
-    //     setData(res.data);
-    // },[])
-
     useEffect(() => {
         async function getData() {
-          const res = await axios.get("http://localhost:8080/users/whoisin", { withCredentials: true });
-          setData(res.data);
+            const res = await axios.get("http://localhost:8080/users/whoisin", { withCredentials: true });
+            setData(res.data);
         }
         getData();
-      }, []);
-
-    // const getUser = async () => {
-    //     const res = await axios.get("http://localhost:8080/users/whoisin");
-    //     setData(res.data);
-    // }
+    }, []);
 
     const login = async (username, password) => {
         const res = await axios.post("http://localhost:8080/auth/login", {

@@ -8,10 +8,10 @@ import Registration from './registration/Registration';
 const LoginForm = () => {
   const [form] = Form.useForm();
   const [, forceUpdate] = useState(); // To disable submit button at the beginning.
-  
-  
+
+
   const { username, login, logout } = useContext(UserContext);
-  
+
   useEffect(() => {
     forceUpdate({});
   }, [username]);
@@ -28,68 +28,66 @@ const LoginForm = () => {
   }
 
 
-  if(!username){
-  return (
-    <Form form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
-      <Form.Item
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your username!',
-          },
-        ]}
-      >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-      >
-        <Input
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
-      <Form.Item shouldUpdate>
-        {() => (
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={
-              !form.isFieldsTouched(true) ||
-              form.getFieldsError().filter(({ errors }) => errors.length).length
-            }
-          >
-            Log in
-          </Button>
-        )}
-      </Form.Item>
-      <Form.Item>
-        <Registration />
-      </Form.Item>
-    </Form>
-  );
-        } else {
-            return (
-              <Form form={form} name="horizontal_login" layout="inline">
-                <Form.Item>
-                  <span style={{"paddingRight" : "2em"}}>Logged in as {username}</span> 
-                  <Button onClick={signout}>Logout</Button>
-                </Form.Item>
-              </Form>
-                
-                
-            )
-        }
+  if (!username) {
+    return (
+      <Form form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>
+        <Form.Item
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your username!',
+            },
+          ]}
+        >
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Item>
+        <Form.Item shouldUpdate>
+          {() => (
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={
+                !form.isFieldsTouched(true) ||
+                form.getFieldsError().filter(({ errors }) => errors.length).length
+              }
+            >
+              Log in
+            </Button>
+          )}
+        </Form.Item>
+        <Form.Item>
+          <Registration />
+        </Form.Item>
+      </Form>
+    );
+  } else {
+    return (
+      <Form form={form} name="horizontal_login" layout="inline">
+        <Form.Item>
+          <span style={{ "paddingRight": "2em" }}>Logged in as {username}</span>
+          <Button onClick={signout}>Logout</Button>
+        </Form.Item>
+      </Form>
+
+
+    )
+  }
 };
 
 export default LoginForm;
-
-// ReactDOM.render(<LoginForm />, mountNode);
