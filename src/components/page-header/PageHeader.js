@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { PageHeader as AntPageHeader, Menu, Button } from 'antd';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import LoginForm from './LoginForm';
+import { UserContext } from '../../contexts/UserContext';
 
 
 const StyledHeader = styled(AntPageHeader)`
@@ -13,6 +13,7 @@ const StyledHeader = styled(AntPageHeader)`
 
 export default function PageHeader() {
 
+  const {err} = useContext(UserContext);
 
   return (
 
@@ -35,6 +36,7 @@ export default function PageHeader() {
             Staff
           </Link>
         </Menu.Item>
+        <span style={{"float": "right", "color":"red", "paddingRight": "28em"}}>{err}</span>
       </Menu>
     </StyledHeader>
 </>
