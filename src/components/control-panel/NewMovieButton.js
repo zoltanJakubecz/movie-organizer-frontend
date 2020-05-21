@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'antd/es/button';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { UserContext } from '../../contexts/UserContext';
 
 export default function NewMovieButton(props) {
 
   const [movieFormOpen, setMovieFormOpen] = props.movieFormState;
+  const {username} = useContext(UserContext)
 
   const onClick = function () {
     setMovieFormOpen(!movieFormOpen);
@@ -12,6 +14,7 @@ export default function NewMovieButton(props) {
 
   return (
     <Button
+      disabled={!username}
       className="newButton"
       type="primary"
       onClick={onClick}
