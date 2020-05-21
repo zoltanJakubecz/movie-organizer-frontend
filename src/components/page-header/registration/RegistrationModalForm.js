@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Modal, Input } from 'antd';
+import { Form, Modal, Input, notification } from 'antd';
 
 const ModalForm = ({ visible, onSubmit, onCancel }) => {
 
@@ -15,10 +15,7 @@ const ModalForm = ({ visible, onSubmit, onCancel }) => {
       title="Register account"
       okText="Register"
       cancelText="Cancel"
-      onCancel={() => {
-        form.resetFields();
-        onCancel();
-      }}
+      onCancel={() => { onCancel(form); }}
       onOk={() => {
         form
           .validateFields()
@@ -29,8 +26,12 @@ const ModalForm = ({ visible, onSubmit, onCancel }) => {
               valid: usernameValid
             })
             if (usernameValid) {
-              form.resetFields();
-              onCancel();
+              onCancel(form);
+              notification.success({
+                message: "Success",
+                description: `You have just registered as ${values.username}!`,
+                top: 72
+              })
             }
           })
       }}

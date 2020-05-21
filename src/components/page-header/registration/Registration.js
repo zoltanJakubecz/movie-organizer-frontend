@@ -27,8 +27,9 @@ export default function Registration() {
       <RegistrationModalForm
         visible={modalOpen}
         onSubmit={onSubmit}
-        onCancel={() => {
+        onCancel={form => {
           setModalOpen(false);
+          form.resetFields();
         }}
       />
     </div>
