@@ -20,17 +20,17 @@ const ModalForm = ({ visible, onSubmit, onCancel }) => {
         form
           .validateFields()
           .then(async values => {
-            const usernameValid = await onSubmit(values);
+            const dto = await onSubmit(values);
             setUsernameValidation({
               checked: true,
-              valid: usernameValid
+              valid: !!dto.username
             })
-            if (usernameValid) {
+            if (!!dto.username) {
               onCancel(form);
               notification.success({
                 message: "Success",
                 description: `You have just registered as ${values.username}!`,
-                top: 72
+                top: 64
               })
             }
           })
