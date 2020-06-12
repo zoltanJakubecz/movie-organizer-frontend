@@ -63,8 +63,8 @@ export const MovieProvider = props => {
     }, requestConfig));
   }
 
-  const detachCategory = function (movieId, categoryId) {
-    axios.delete(`http://localhost:8080/api/movies/${movieId}/categories/${categoryId}`, requestConfig);
+  const detachCategory = function (movieId, category) {
+    axios.delete(`http://localhost:8080/api/movies/${movieId}/categories/${category}`, requestConfig);
   }
 
   async function handleDeleteFromContext(id) {
