@@ -5,19 +5,17 @@ import { PlusOutlined } from '@ant-design/icons';
 
 class Tags extends React.Component {
   state = {
-    tags: this.props.categories.map(({ name }) => name),
+    tags: this.props.categories,
     inputVisible: false,
     inputValue: '',
   };
 
-  getCategory = name => {
-    return this.props.categories.find(category => category.name === name);
-  }
+  getCategory = category => this.props.categories.find(c => c === category);
 
   handleClose = removedTag => {
     const filteredTags = this.state.tags.filter(tag => tag !== removedTag);
     const removedCategory = this.getCategory(removedTag);
-    this.props.actions.detachFromMovie(this.props.movieId, removedCategory.id);
+    this.props.actions.detachFromMovie(this.props.movieId, removedCategory);
     this.setState({ tags: filteredTags });
     this.props.setCategories(this.props.categories.filter(c => c !== removedCategory));
   };
@@ -38,7 +36,7 @@ class Tags extends React.Component {
     }
     const res = await this.props.actions.attachToMovie(this.props.movieId, inputValue);
     const attachedCategory = res.data;
-    const extendedTags = [...tags, attachedCategory.name];
+    const extendedTags = [...tags, attachedCategory];
     this.setState({
       tags: extendedTags,
       inputVisible: false,

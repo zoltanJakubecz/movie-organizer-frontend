@@ -6,9 +6,9 @@ import LoginPromptPanel from '../LoginPromptPanel';
 
 export default function MovieList() {
     const { movies } = useContext(MovieContext);
-    const { username } = useContext(UserContext);
+    const { username, networkError } = useContext(UserContext);
 
-    return !!username ? (
+    return networkError ? "Could not connect to server. :(" : !!username ? (
         <div id="movie-list">
             {movies.map(movie => (
                 <MovieCard key={movie.id} movie={movie} />

@@ -6,11 +6,17 @@ export const UserContext = React.createContext();
 export const UserProvider = (props) => {
 
     const [data, setData] = useState({});
+    const [networkError, setNetworkError] = useState(false);
 
     useEffect(() => {
         async function getData() {
-            const res = await axios.get("http://localhost:8080/users/whoisin", { withCredentials: true });
-            setData(res.data);
+            const res = await axios
+                .get("http://localhost:8080/users/whoisin", { withCredentials: true })
+                .catch(e => setNetworkError(true));
+            if (res !== undefined) {
+                setData(res.data);
+                setNetworkError(false);
+            }
         }
         getData();
     }, []);
@@ -38,7 +44,7 @@ export const UserProvider = (props) => {
     }
 
     return (
-        <UserContext.Provider value={{ ...data, login, logout, register }}>
+        <UserContext.Provider value={{ ...data, networkError, login, logout, register }}>
             {props.children}
         </UserContext.Provider>
     )
