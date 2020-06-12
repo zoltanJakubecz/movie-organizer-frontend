@@ -5,9 +5,9 @@ import 'antd/dist/antd.css';
 import './App.css';
 import PageHeader from './components/page-header/PageHeader';
 import { MovieProvider } from './contexts/MovieContext';
-import { PersonProvider } from './contexts/PersonContext';
+// import { PersonProvider } from './contexts/PersonContext';
+// import PersonsContent from './components/PersonsContent';
 import AppContent from './components/AppContent';
-import PersonsContent from './components/PersonsContent';
 import { UserProvider } from './contexts/UserContext';
 
 function App() {
@@ -15,13 +15,15 @@ function App() {
     <Router>
       <div className="App">
         <UserProvider>
-        <PersonProvider>
-        <MovieProvider>
-        <PageHeader />
-          <Route exact path={["/", "/movies"]} component={AppContent} />
-          <Route exact path="/artists" component={PersonsContent} />
-        </MovieProvider>
-        </PersonProvider>
+          {/* <PersonProvider> */}
+          <MovieProvider>
+            <PageHeader />
+            <Route exact path={["/", "/movies"]} component={AppContent} />
+            <Route exact path="/artists" render={() => (
+              <div className="appContent">Not implemented yet.</div>
+            )} />
+          </MovieProvider>
+          {/* </PersonProvider> */}
         </UserProvider>
       </div>
     </Router>
