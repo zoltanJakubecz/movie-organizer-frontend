@@ -32,10 +32,6 @@ export default function MovieCard(props) {
   const [visible, setVisible] = useState(false);
 
   const onCreate = values => {
-    console.log('Received values of form: ', values);
-
-
-    console.log(categories);
     setTitle(values.title);
     setDirector(values.director);
     setRelease(values.release);

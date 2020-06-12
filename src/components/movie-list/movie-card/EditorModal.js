@@ -1,9 +1,10 @@
 import React from 'react'
 import Modal from './Modal';
-import {Input, 
-        Form, 
-        Button, 
-        } from 'antd';
+import {
+  Input,
+  Form,
+  Button,
+} from 'antd';
 
 import './editor-modal.css';
 
@@ -11,8 +12,6 @@ const layout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 18 },
 };
-
-
 
 export default function EditorModal(props) {
 
@@ -26,13 +25,11 @@ export default function EditorModal(props) {
 
 
   const onFinish = values => {
-    console.log('Received values of form: ', values);
     setTitle(values.title);
-    if(values.newCategory){
+    if (values.newCategory) {
       values.categories.push(values.newCategory);
     }
     setCategories(values.categories);
-    console.log(categories);
     setDirector(values.director);
     setRelease(values.release);
     setImageURL(values.imageURL);
@@ -57,7 +54,7 @@ export default function EditorModal(props) {
       </div>
 
       <div className="modal-body">
-      <h1>Edit your movie</h1>
+        <h1>Edit your movie</h1>
         <Form {...layout} onFinish={onFinish} initialValues={{
           title: title,
           director: director,
@@ -68,15 +65,15 @@ export default function EditorModal(props) {
         }} >
 
           <Form.Item name="title" label="Title" rules={[{ required: true, message: 'Please input your username!' }]}>
-            <Input  />
+            <Input />
           </Form.Item>
 
           <Form.Item name="director" label="Director">
-            <Input  />
+            <Input />
           </Form.Item>
 
           <Form.Item name="release" label="Release">
-            <Input  />
+            <Input />
           </Form.Item>
 
           <Form.Item name="plot" label="Plot">
@@ -84,17 +81,17 @@ export default function EditorModal(props) {
           </Form.Item>
 
           <Form.Item name="imageURL" label="Image URL">
-            <Input  />
+            <Input />
           </Form.Item>
 
-          
 
-        <div className="modal-footer">
-          <Button className="update-button" type="primary" htmlType="submit">Update</Button>
 
-          <Button type="dashed" onClick={() => modalRef.current.closeModal()}>Cancel</Button>
-        </div>
-      </Form>
+          <div className="modal-footer">
+            <Button className="update-button" type="primary" htmlType="submit">Update</Button>
+
+            <Button type="dashed" onClick={() => modalRef.current.closeModal()}>Cancel</Button>
+          </div>
+        </Form>
       </div>
 
     </Modal>

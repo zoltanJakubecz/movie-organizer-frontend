@@ -21,7 +21,6 @@ export const UserProvider = (props) => {
             password
         }, { withCredentials: true });
         setData(res.data);
-        console.log(res.data.err)
     }
 
     const logout = async () => {

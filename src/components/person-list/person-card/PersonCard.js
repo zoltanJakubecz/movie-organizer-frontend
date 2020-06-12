@@ -9,7 +9,7 @@ import './person-card.css';
 export default function PersonCard(props) {
   const [isDeleteActive, setIsDeleteActive] = useState(false);
   const { actions } = useContext(PersonContext);
-//   const handleDeleteFromContext = actions.delete;
+  //   const handleDeleteFromContext = actions.delete;
 
   const {
     id: mId,
@@ -26,19 +26,16 @@ export default function PersonCard(props) {
   const [visible, setVisible] = useState(false);
 
   const onCreate = values => {
-    console.log('Received values of form: ', values);    
     setName(values.name);
     setComment(values.comment);
-
-
-//     actions.update(props.movie.id, {
-//       title: values.title,
-//       categories:categories,
-//       director: values.director,
-//       plot: values.plot,
-//       releaseDate: values.release,
-//       imageURL: values.imageURL
-//     });
+    //     actions.update(props.movie.id, {
+    //       title: values.title,
+    //       categories:categories,
+    //       director: values.director,
+    //       plot: values.plot,
+    //       releaseDate: values.release,
+    //       imageURL: values.imageURL
+    //     });
 
     setVisible(false);
   };
@@ -65,10 +62,10 @@ export default function PersonCard(props) {
       <Card className="movie-card">
         <div className="movie-card-header">
           <div className="movie-card-title">{name}</div>
-          
 
-          <div><Button type="dashed" onClick={ () => { setVisible(true); } }>Edit</Button></div>
-          
+
+          <div><Button type="dashed" onClick={() => { setVisible(true); }}>Edit</Button></div>
+
           <ModalForm
             visible={visible}
             onCreate={onCreate}
@@ -81,7 +78,7 @@ export default function PersonCard(props) {
             }}
             // update={actions.update}
             onCancel={() => {
-            setVisible(false); 
+              setVisible(false);
             }}
           />
 
@@ -95,8 +92,8 @@ export default function PersonCard(props) {
             }
           </div>
           <div className="movie-card-comment">
-                    <div>Comment: {comment}</div>
-                </div>
+            <div>Comment: {comment}</div>
+          </div>
         </div>
 
         <div className="movie-card-details">
@@ -107,12 +104,12 @@ export default function PersonCard(props) {
                 {playedIn.map((film) => {
                   return <dd key={film} className="movie-card-details-plot"> - {film}</dd>
                 })}
-  
-                <dt>Creator of:</dt>          
+
+                <dt>Creator of:</dt>
                 {creatorOf.map((film) => {
                   return <dd key={film}> - {film}</dd>
                 })}
-              </dl>        
+              </dl>
             </Panel>
           </Collapse>
         </div>
