@@ -6,7 +6,7 @@ import { UserContext } from '../../../contexts/UserContext';
 export default function Registration() {
 
   const [modalOpen, setModalOpen] = useState(false);
-  const { register } = useContext(UserContext);
+  const { register, setUsername } = useContext(UserContext);
 
   const onSubmit = async values => {
     return await register({
@@ -31,6 +31,7 @@ export default function Registration() {
           setModalOpen(false);
           form.resetFields();
         }}
+        setUsername={setUsername}
       />
     </div>
   )

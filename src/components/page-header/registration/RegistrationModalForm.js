@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Modal, Input, notification } from 'antd';
 
-const ModalForm = ({ visible, onSubmit, onCancel }) => {
+const ModalForm = ({ visible, onSubmit, onCancel, setUsername }) => {
 
   const [form] = Form.useForm();
   const [usernameValidation, setUsernameValidation] = useState({
@@ -20,18 +20,19 @@ const ModalForm = ({ visible, onSubmit, onCancel }) => {
         form
           .validateFields()
           .then(async values => {
-            const dto = await onSubmit(values);
+            const username = await onSubmit(values);
             setUsernameValidation({
               checked: true,
-              valid: !!dto.username
+              valid: !!username
             })
-            if (!!dto.username) {
+            if (!!username) {
               onCancel(form);
               notification.success({
                 message: "Success",
                 description: `You have just registered as ${values.username}!`,
                 top: 64
               })
+              setUsername(values.username);
             }
           })
       }}

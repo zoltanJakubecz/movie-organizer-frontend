@@ -38,14 +38,19 @@ export const UserProvider = (props) => {
 
     const register = async credentials => {
         const res = await axios.post(`${baseUrl}/auth/register`, credentials, { withCredentials: true });
-        const dto = res.data;
-        if (!!dto.username) {
-            setData({ username: dto.username });
-        }
+        const { username } = res.data;
+        return username;
+        // if (!!dto.username) {
+        //     setData({ username: dto.username });
+        // }
+    }
+
+    const setUsername = username => {
+        setData({ username });
     }
 
     return (
-        <UserContext.Provider value={{ ...data, networkError, login, logout, register }}>
+        <UserContext.Provider value={{ ...data, networkError, login, logout, register, setUsername }}>
             {props.children}
         </UserContext.Provider>
     )
