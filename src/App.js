@@ -9,22 +9,25 @@ import { MovieProvider } from './contexts/MovieContext';
 // import PersonsContent from './components/PersonsContent';
 import AppContent from './components/AppContent';
 import { UserProvider } from './contexts/UserContext';
+import { GlobalProvider } from './contexts/GlobalContext';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <UserProvider>
-          {/* <PersonProvider> */}
-          <MovieProvider>
-            <PageHeader />
-            <Route exact path={["/", "/movies"]} component={AppContent} />
-            <Route exact path="/artists" render={() => (
-              <div className="appContent">Not implemented yet.</div>
-            )} />
-          </MovieProvider>
-          {/* </PersonProvider> */}
-        </UserProvider>
+        <GlobalProvider>
+          <UserProvider>
+            {/* <PersonProvider> */}
+            <MovieProvider>
+              <PageHeader />
+              <Route exact path={["/", "/movies"]} component={AppContent} />
+              <Route exact path="/artists" render={() => (
+                <div className="appContent">Not implemented yet.</div>
+              )} />
+            </MovieProvider>
+            {/* </PersonProvider> */}
+          </UserProvider>
+        </GlobalProvider>
       </div>
     </Router>
   );

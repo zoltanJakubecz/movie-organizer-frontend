@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
+import { GlobalContext } from './GlobalContext';
 
 export const UserContext = React.createContext();
 
@@ -7,11 +8,12 @@ export const UserProvider = (props) => {
 
     const [data, setData] = useState({});
     const [networkError, setNetworkError] = useState(false);
+    const { baseUrl } = useContext(GlobalContext)
 
     useEffect(() => {
         async function getData() {
             const res = await axios
-                .get("http://localhost:8080/users/whoisin", { withCredentials: true })
+                .get(`${baseUrl}/users/whoisin`, { withCredentials: true })
                 .catch(e => setNetworkError(true));
             if (res !== undefined) {
                 setData(res.data);
@@ -19,10 +21,10 @@ export const UserProvider = (props) => {
             }
         }
         getData();
-    }, []);
+    }, [baseUrl]);
 
     const login = async (username, password) => {
-        const res = await axios.post("http://localhost:8080/auth/login", {
+        const res = await axios.post(`${baseUrl}/auth/login`, {
             username,
             password
         }, { withCredentials: true });
@@ -30,17 +32,16 @@ export const UserProvider = (props) => {
     }
 
     const logout = async () => {
-        await axios.delete("http://localhost:8080/auth/logout", { withCredentials: true });
+        await axios.delete(`${baseUrl}/auth/logout`, { withCredentials: true });
         setData({ username: null });
     }
 
     const register = async credentials => {
-        const res = await axios.post("http://localhost:8080/auth/register", credentials, { withCredentials: true });
+        const res = await axios.post(`${baseUrl}/auth/register`, credentials, { withCredentials: true });
         const dto = res.data;
         if (!!dto.username) {
             setData({ username: dto.username });
         }
-        return dto;
     }
 
     return (

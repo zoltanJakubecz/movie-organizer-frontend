@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from './UserContext';
+import { GlobalContext } from './GlobalContext';
 
 
 export const MovieContext = createContext();
@@ -16,11 +17,12 @@ export const MovieProvider = props => {
     movies: [],
   });
 
+  const { baseUrl } = useContext(GlobalContext);
   const { username } = useContext(UserContext);
 
   useEffect(() => {
     async function getData() {
-      const res = await axios.get("http://localhost:8080/api/movies/?page=1", requestConfig)
+      const res = await axios.get(`${baseUrl}/api/movies/?page=1`, requestConfig)
       if (res !== undefined) {
         setData(Object.assign(res.data, { page: 1 }));
       }
@@ -36,15 +38,15 @@ export const MovieProvider = props => {
 
       )
     }
-  }, [username]);
+  }, [baseUrl, username]);
 
   const loadPage = async function (page) {
-    const res = await axios.get("http://localhost:8080/api/movies/?page=" + page, requestConfig);
+    const res = await axios.get(`${baseUrl}/api/movies/?page=${page}`, requestConfig);
     setData(Object.assign(res.data, { page }));
   }
 
   const add = async function (movie) {
-    const res = await axios.post("http://localhost:8080/api/movies", movie, requestConfig);
+    const res = await axios.post(`${baseUrl}/api/movies`, movie, requestConfig);
     setData(Object.assign({ ...data }, {
       totalMovieCount: data.totalMovieCount + 1,
       movies: [res.data, ...(data.movies.slice(0, 4))]
@@ -52,11 +54,11 @@ export const MovieProvider = props => {
   }
 
   const update = async function (id, movie) {
-    await axios.put("http://localhost:8080/api/movies/" + id, movie, requestConfig);
+    await axios.put(`${baseUrl}/api/movies/${id}`, movie, requestConfig);
   }
 
   const attachCategory = async function (movieId, category) {
-    return await axios.post(`http://localhost:8080/api/movies/${movieId}/categories`, category, Object.assign({
+    return await axios.post(`${baseUrl}/api/movies/${movieId}/categories`, category, Object.assign({
       headers: {
         'Content-Type': 'text/plain'
       }
@@ -64,11 +66,11 @@ export const MovieProvider = props => {
   }
 
   const detachCategory = function (movieId, category) {
-    axios.delete(`http://localhost:8080/api/movies/${movieId}/categories/${category}`, requestConfig);
+    axios.delete(`${baseUrl}/api/movies/${movieId}/categories/${category}`, requestConfig);
   }
 
   async function handleDeleteFromContext(id) {
-    await axios.delete("http://localhost:8080/api/movies/" + id, requestConfig);
+    await axios.delete(`${baseUrl}/api/movies/${id}`, requestConfig);
     await loadPage(data.page);
   }
 
