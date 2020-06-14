@@ -5,7 +5,7 @@ export const GlobalContext = React.createContext();
 export const GlobalProvider = props => {
 
   return (
-    <GlobalContext.Provider value={{ baseUrl: "http://localhost:8080" }}>
+    <GlobalContext.Provider value={{ baseUrl: "" }}>
       {props.children}
     </GlobalContext.Provider>
   )
